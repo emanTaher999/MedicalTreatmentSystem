@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86c22f3fbdbc438080e6f35ff2970611" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.COMPANYPOLICY" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GENERALCEILING" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INDIVIDUAL" Width="2.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OCCUPATION" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ORGANIZATIONPROFILE" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ORGANIZATIONSTRUCTURE" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RELATION" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STRUCTURECODE" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FKCOMPANYPOLICYORGSTRUCTURE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALOCCUPATION" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSMAININDV" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCDEPT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCMAIN" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCORG" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCSECT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSRELATION" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKORGANIZATIONPROFILESTRUCTURE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKORGANIZATIONSTRUCTUREPARENT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.JOBTITLE" Width="1.5" PointX="3.75" PointY="19.125" />
+        <AssociationConnector Association="Model.FKINDIVIDUALJOBTITLE" />
+        <EntityTypeShape EntityType="Model.CARD" Width="1.5" PointX="8.25" PointY="6.75" />
+        <AssociationConnector Association="Model.FKCARDINDIVIDUAL" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

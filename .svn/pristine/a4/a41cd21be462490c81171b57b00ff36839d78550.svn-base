@@ -1,0 +1,74 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">     الخدمات الطبية </h2>
+
+<fieldset class="card shadow w-50 p-4" dir="rtl">
+    <legend>MEDICALSERVICE</legend>
+    <legend class="bg-custom shadow  px-3">Details</legend>
+
+
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.NAME)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.NAME)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.NAMEEN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAMEEN)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.SERVICEINCLUDE)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.SERVICEINCLUDE)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.APPLICABLEFOR)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.APPLICABLEFOR)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.CEILINGTYPE)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.CEILINGTYPE)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.LIMITSERVICE)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.LIMITSERVICE)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.STATUS)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.STATUS)
+    </div>
+
+    <div class="alert alert-info">
+        @Html.DisplayNameFor(model => model.LASTUPDATED)
+    </div>
+    <div class="alert alert-info">
+        @Html.DisplayFor(model => model.LASTUPDATED)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

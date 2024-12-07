@@ -1,0 +1,267 @@
+﻿@model MedicalTreatment.Models.INDIVIDUAL
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<legend>INDIVIDUAL</legend>
+@using (Html.BeginForm("Create", "Individual", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.NAME)
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.NAMEEN)
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.BIRTHDATE)
+            <div>
+                @Html.TextBoxFor(model => model.BIRTHDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.BIRTHDATE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.GENDER)
+            <div>
+                @Html.DropDownListFor(model => model.GENDER, new List<SelectListItem>{ new SelectListItem{
+                Text="ذكر",
+                Value = "Male"
+            },
+ new SelectListItem{
+                Text="انثى",
+                Value = "Female"
+            }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GENDER)
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.MAINORGANISATIONID)
+            <div>
+                @Html.DropDownList("MAINORGANISATIONID", null, "---اختر---", new { @class = "form-control", @id = "MAINORGANISATION", onchange = "MAINORGANISATIONChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.MAINORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.ORGANISATIONID)
+            <div>
+                @Html.DropDownList("ORGANISATION", null, "---اختر---", new { @class = "form-control", @id = "ORGANISATION", onchange = "DEPARTMENTChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.ORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.DEPARTMENTID)
+            <div>
+                @Html.DropDownList("DEPARTMENT", null, "---اختر---", new { @class = "form-control", @id = "DEPARTMENT", onchange = "SECTIONChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.DEPARTMENTID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.SECTIONID)
+            <div>
+                @Html.DropDownList("SECTIONID", null, "---اختر---", new { @class = "form-control", @id = "SECTIONID" })
+                @Html.ValidationMessageFor(model => model.SECTIONID)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.MARITALSTATUS)
+            <div>
+                @Html.DropDownListFor(model => model.MARITALSTATUS, new List<SelectListItem>{ new SelectListItem{
+                Text="متزوج/ة",
+                Value = "Married"
+            },
+ new SelectListItem{
+                Text="اعزب",
+                Value = "Single"
+            },
+           new SelectListItem{
+                Text="مطلق/ة",
+                Value = "Divorced"
+            },
+            new SelectListItem{
+                Text="ارمل/ة",
+                Value = "Widow"
+            }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MARITALSTATUS)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.NATIONALITY)
+            <div>
+                @Html.DropDownListFor(model => model.NATIONALITY, new List<SelectListItem>{ new SelectListItem{
+                Text="مواطن",
+                Value = "Citizen"
+            },
+ new SelectListItem{
+                Text="اجنبي",
+                Value = "Foreigner"
+            }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NATIONALITY)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.OCCUPATIONID, "OCCUPATION")
+            <div>
+                @Html.DropDownListFor(model => model.OCCUPATIONID, ViewBag.OCCUPATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OCCUPATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.JOBNUMBER)
+            <div>
+                @Html.TextBoxFor(model => model.JOBNUMBER, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.JOBNUMBER)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.JOBTITLEID, "JOBTITLE")
+            <div>
+                @Html.DropDownListFor(model => model.JOBTITLEID, ViewBag.JOBTITLEID as SelectList, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.JOBTITLEID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("Pictures")
+            <div>
+                <input type="file" name="file" class="btn btn-info form-control" />
+                @Html.ValidationMessage("Pictures")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("هل يكفل احد ؟")
+            <div>
+                @Html.DropDownList("sponsor", new List<SelectListItem>{ new SelectListItem{
+                Text="نعم",
+                Value = "Yes"
+            },
+ new SelectListItem{
+                Text="لا",
+                Value = "No"
+            }}, "---اختر---", new { @class = "form-control", @id = "sponsor", onchange = "Checksponsor(this.value);" })
+                @Html.ValidationMessageFor(model => model.GENDER)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("عدد المكفولين")
+            <div>
+                @Html.TextBox("Number", null, new { @class = "form-control", onchange = "getpartialDiv(this.value);", @id = "Number", @disabled = "disabled", @Value = "0" })
+                @Html.ValidationMessageFor(model => model.LASTUPDATED)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-lg-12" id="partial">
+
+        </div>
+    </div>
+    <div align="center">
+
+        <input type="submit" value="Create" class="btn btn-primary" />
+
+        <a href="/Individual/Index" class="btn btn-outline-info">Back to List</a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function getpartialDiv(NUMBEROFCHILDREN) {
+            debugger
+            var Number = $('#Number').val();
+            input = { 'Number': Number };
+            $.ajax({
+                url: '@Url.Action("getpartialDiv", "Individual")',
+                type: 'post',
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    document.getElementById("partial").innerHTML = data;
+                },
+                error: function (err) {
+                    console.log("ajax failure (links permisoins): " + err.val());
+                }
+            });
+        }
+        function Checksponsor(id) {
+            debugger
+            if (id == "No") {
+                $("#Number").attr("disabled", "disabled");
+            }
+            else {
+                $("#Number").removeAttr('disabled');
+            }
+        }
+        function MAINORGANISATIONChange(id) {
+            debugger
+            var _city = id.replace('MAINORGANISATION', 'ORGANISATION');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ ORGANISATION: id }, "/Individual/getORGANISATION", "ORGANISATION", " ", true);
+        }
+        function DEPARTMENTChange(id) {
+            debugger
+            var _city = id.replace('ORGANISATION', 'DEPARTMENT');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ DEPARTMENT: id }, "/Individual/getDEPARTMENT", "DEPARTMENT", " ", true);
+        }
+        function SECTIONChange(id) {
+            debugger
+            var _city = id.replace('DEPARTMENT', 'SECTIONID');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ SECTIONID: id }, "/Individual/getSECTIONID", "SECTIONID", " ", true);
+        }
+        function GetDropDown(input, url, targetId, defaultValue, withdefaultValue) {
+            var target = $('select[name="' + targetId + '"]');
+            //var target = $('#' + targetId);
+            $.ajax({
+                url: url,
+                type: "POST",
+                traditional: true,
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    target.empty();
+                    if (withdefaultValue)
+                        target.append("<option value='" + 0 + "'>" + defaultValue + " </option>");
+                    $(data).each(function () {
+                        $(document.createElement('option'))
+                .attr('value', this.Value)
+                .text(this.Text)
+                .appendTo(target);
+                    });
+
+                    return;
+
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete MEDICALSERVICE</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset class="card shadow w-100 p-4" dir="rtl">
+    <div class="row my-2">
+
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.NAME)
+                <div class="">
+                    @Html.DisplayFor(model => model.NAME)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.NAME)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.NAME)
+            </div>*@
+
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.NAMEEN)
+                <div class="">
+                    @Html.DisplayFor(model => model.NAMEEN)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.NAMEEN)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.NAMEEN)
+            </div>*@
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.SERVICEINCLUDE)
+                <div class="">
+                    @Html.DisplayFor(model => model.SERVICEINCLUDE)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.SERVICEINCLUDE)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.SERVICEINCLUDE)
+            </div>*@
+
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.APPLICABLEFOR)
+                <div class="">
+                    @Html.DisplayFor(model => model.APPLICABLEFOR)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.APPLICABLEFOR)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.APPLICABLEFOR)
+            </div>*@
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.CEILINGTYPE)
+                <div class="">
+                    @Html.DisplayFor(model => model.CEILINGTYPE)
+                </div>
+            </div>
+
+        </div>
+
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.CEILINGTYPE)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.CEILINGTYPE)
+            </div>*@
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.LIMITSERVICE)
+                <div class="">
+                    @Html.DisplayFor(model => model.LIMITSERVICE)
+                </div>
+            </div>
+
+        </div>
+
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.LIMITSERVICE)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LIMITSERVICE)
+            </div>*@
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.STATUS)
+                <div class="">
+                    @Html.DisplayFor(model => model.STATUS)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.STATUS)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>*@
+
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.LASTUPDATED)
+                <div class="">
+                    @Html.DisplayFor(model => model.LASTUPDATED)
+                </div>
+            </div>
+
+        </div>
+
+        @*<div class="display-label">
+                @Html.DisplayNameFor(model => model.LASTUPDATED)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.LASTUPDATED)
+            </div>*@
+</div>
+</fieldset>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p class="mt-3  d-flex justify-content-end w-50">
+        <a href="/MedicalServices/Index" class="btn btn-outline-info mx-2"> Back to List</a>
+
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    </p>
+}

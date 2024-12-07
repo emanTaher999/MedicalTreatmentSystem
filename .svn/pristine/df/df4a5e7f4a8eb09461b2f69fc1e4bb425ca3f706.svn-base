@@ -1,0 +1,1035 @@
+﻿@*@model MedicalTreatment.Models.VMMedicalClaimForm*@
+@model MedicalTreatment.Models.VMMedicalClaimForm
+@using MedicalTreatment.Models;
+@using MedicalTreatment.Resources
+
+@{
+
+    ViewBag.Title = "Edit";
+    var message = TempData["AlertMessage"] ?? string.Empty;
+   
+    var x = ViewData["ENTITLEMENTPERCENT"];
+    var sum = TempData["message"];
+    Entities db = new Entities();
+}
+
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">أستمارة طلب منصرفات علاجية</h2>
+<br />
+
+@using (Html.BeginForm("Edit", "MedicalClaimForm", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+      
+     @Html.HiddenFor(model => model.medForm.ID)
+                @Html.HiddenFor(model => model.medForm.INDIVIDUALID)
+                @Html.HiddenFor(model => model.medForm.PATIENTID)
+    @Html.HiddenFor(model => model.medForm.DEPARTMENTID)
+        @Html.HiddenFor(model => model.medForm.MAINORGANISATIONID)
+
+    
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("السنة العلاجية")
+
+            <div>
+                @Html.DropDownList("Years", null, "---أختر---", new { @class = "form-control", @id = "Years" })
+
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("أسم الموظف")
+          
+            <div>
+                @Html.DropDownListFor(model => model.medForm.INDIVIDUALID, null, "---أختر---", new { @class = "form-control", @id = "INDIVIDUALID", onchange = "getStructure();GETConsumerCeiling();GETResidualCeiling();" })
+                @Html.ValidationMessageFor(model => model.medForm.INDIVIDUALID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label( "أسم المجموعة")
+
+            <div>
+                @Html.DropDownList("MAINORGANISATIONID", null, "---أختر---", new { @class = "form-control", @id = "MAINORGANISATIONID", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.medForm.MAINORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label( "أسم الشركة")
+
+            <div>
+                @Html.DropDownList("ORGANISATIONID", null, "---أختر---", new { @class = "form-control", @id = "ORGANISATIONID", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.medForm.ORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label( "أسم الأدارة")
+
+            <div>
+                @Html.DropDownList("DEPARTMENTID", null, "---أختر---", new { @class = "form-control", @id = "DEPARTMENTID", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.medForm.DEPARTMENTID)
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("أسم القسم")
+
+            <div>
+                @Html.DropDownList("SECTIONID", null, "---أختر---", new { @class = "form-control", @id = "SECTIONID", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.medForm.SECTIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("المريض الموظف ؟")
+
+            <div>
+                @Html.DropDownList("PATIENTEMPLOYEE", null, "---أختر---", new { @class = "form-control", @id = "PATIENTEMPLOYEE", onchange = "getPATIENTID(this.id);" })
+                @Html.ValidationMessageFor(model => model.medForm.PATIENTEMPLOYEE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("أسم المريض")
+
+            <div>
+                @Html.DropDownList("PATIENTID", null, "---أختر---", new { @class = "form-control", @id = "PATIENTID" })
+
+                @Html.ValidationMessageFor(model => model.medForm.PATIENTID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.medForm.MEDICALSERVICEID, "أسم الخدمة الطبية")
+
+            <div>
+                @Html.DropDownList("MEDICALSERVICEID", null, "---أختر---", new { @class = "form-control", @id = "MEDICALSERVICEID", @onchange = "checkMedicalService();" })
+                @Html.Label("الخدمة غير مسموحة لأسرة الموظف", new { @class = "text-danger", @id = "errMsgAr", @hidden = "hidden", @style = "color:red" })
+                @Html.Label("نوع الخدمة لا ينطبق على جنس المريض", new { @id = "errMsgAr2", @hidden = "hidden", @style = "color:red" })
+
+
+                @Html.ValidationMessageFor(model => model.medForm.MEDICALSERVICEID)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-3">
+            @*@Html.Hidden("Year", new { @Value = Year, @id = "Year" })*@
+
+            @Html.Label("مبلغ السقف المستهلك")
+
+            <div>
+                @Html.TextBox("ConsumerCeiling", "", new { @class = "form-control", @id = "ConsumerCeiling", @readonly = "readonly" })
+                @Html.ValidationMessage("MEDICALDETAILSERVICEID")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("مبلغ السقف المتبقي")
+
+            <div>
+                @Html.TextBox("ResidualCeiling", "", new { @class = "form-control", @id = "ResidualCeiling", @readonly = "readonly" })
+                @Html.ValidationMessage("MEDICALDETAILSERVICEID")
+            </div>
+        </div>
+        @*<div class="col-md-3">
+                @Html.Label("السنة العلاجية")
+
+                <div>
+                    @Html.DropDownList("Years", ViewBag.Years as SelectList, "---أختر---", new { @class = "form-control", @id = "Years" })
+
+                </div>
+            </div>*@
+        @*<div class="col-md-3">
+                @Html.Label("مجموع مبالغ الإستحقاق")
+
+                <div>
+                    @Html.TextBox("SumTotal", "", new { @class = "form-control", @id = "SumTotal" })
+
+
+                </div>
+            </div>*@
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("بيان الخدمة الطبية")
+
+            <div>
+                @Html.DropDownList("MEDICALDETAILSERVICEID", null, "---أختر---", new { @class = "form-control", @id = "MEDICALDETAILSERVICEID" })
+                @Html.ValidationMessageFor(model => model.medForm.MEDICALDETAILSERVICEID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label( "تاريخ بداية الأجازة المرضية")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.SICKLEAVESTARTDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.medForm.SICKLEAVESTARTDATE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label( "نهاية بداية الأجازة المرضية")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.SICKLEAVEENDDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.medForm.SICKLEAVEENDDATE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("تاريخ تقديم الطلب")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.CLAIMDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.medForm.CLAIMDATE)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label( "تاريخ توقيع الوحدة الخدمية للموظف")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.EMPLOYEESERVICEUNITDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.medForm.EMPLOYEESERVICEUNITDATE)
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            @Html.Label("تاريخ التصديق")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.APPROVEDDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.medForm.APPROVEDDATE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("جملة مبلغ العلاج")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.TOTALCLAIMAMOUNT, "{0:#,###,###.##}", new { @class = "form-control", id = "TOTALCLAIMAMOUNT", name = "TOTALCLAIMAMOUNT", onchang = "digitGrouping(this.value);" })
+                @Html.ValidationMessageFor(model => model.medForm.TOTALCLAIMAMOUNT)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("المبلغ المستحق")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.ENTITLEMENTAMOUNT, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.medForm.ENTITLEMENTAMOUNT)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+
+        <div class="col-md-3">
+            @Html.Label("المبلغ المصدق")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.APPROVEDAMOUNT, new { @class = "form-control", @onchange = "CheckTotalApprove();" })
+                @Html.Label("المبلغ المصدق أكبر من المتبقى لجملة سقف الموظف", new { @class = "text-danger", @id = "lblEroMesg", @hidden = "hidden", @style = "color:red" })
+                @*@Html.ValidationMessageFor(model => model.APPROVEDAMOUNT)*@
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("تعليق مقدم الطلب")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.CLAIMNOTE, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.medForm.CLAIMNOTE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("تعليق الوحدة الخدمية للموظف")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.EMPLOYEESERVICEUNITNOTE, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.medForm.EMPLOYEESERVICEUNITNOTE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("تعليق الموارد البشرية")
+
+            <div>
+                @Html.TextBoxFor(model => model.medForm.HUMANRESOURCESNOTE, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.medForm.HUMANRESOURCESNOTE)
+            </div>
+        </div>
+    </div>
+    @*<div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("عدد المدخلات")
+            @Html.TextBox("Number", "", new { @class = "form-control", @id = "number", onchange = "getpartialDiv(this.value);" })
+        </div>*@
+        @*<div class="col-md-3">
+                @Html.Label("Claim Id")
+                @Html.LabelFor(model => model.ID, "", new { @class = "form-control", @id = "ID" })
+            </div>*@
+
+    @*</div>*@
+    <div class="col-md-3">
+            @Html.Label("عدد المدخلات")
+            <div>
+                @Html.TextBox("Number", null, new { @class = "form-control", onchange = "getpartialDiv(this.value);", @id = "Number", @disabled = "disabled", @Value = "0" })
+            </div>
+        </div>
+    
+    @*<div class="row">
+        <div class="col-lg-12" id="partial">
+
+        </div>
+    </div>*@
+
+
+    @*<div  class="col-md-3">
+            @Html.LabelFor(model => model.STATUS)
+
+            <div>
+                @Html.TextBoxFor(model => model.STATUS)
+                @Html.ValidationMessageFor(model => model.STATUS)
+            </div>
+        </div>
+        <div  class="col-md-3">
+            @Html.LabelFor(model => model.LASTUPDATED)
+
+            <div>
+                @Html.TextBoxFor(model => model.LASTUPDATED)
+                @Html.ValidationMessageFor(model => model.LASTUPDATED)
+            </div>
+        </div>*@
+      @*getXsum(this.value);*@
+    
+    for (int i = 0; i < Model.medFormDet.ToArray().Length; i++)
+    {
+          @Html.HiddenFor(model => model.medFormDet[i].ID)
+                  
+        <h2>تفاصيل المعلومات الطبية</h2>
+    <div id="list_item" style="margin-top:20px">
+        <div class="control-group">
+            <div id="medICALCLAIMFORMDETAIL" class="controls">
+                <div class="row my-2">
+                    <div class="col-md-3">
+                        @Html.Label("نوع الخدمة")
+                        @Html.DropDownListFor(model => model.medFormDet[i].SERVICEFEESTYPEID, null, new { @class = "form-control", @id = "SERVICEFEESTYPEID" + i, @name = "SERVICEFEESTYPEID" + i })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("المبلغ")
+                     
+                        @Html.TextBoxFor(model => model.medFormDet[i].AMOUNT, "{0:#,###,###.##}", new { @class = "form-control", @id = "AMOUNT" + i, @name = "AMOUNT" + i, onchange = "digitGrouping(this.value)" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("وحدة القياس")
+                        @Html.DropDownListFor(model => model.medFormDet[i].UNITID, null, new { @class = "form-control", @id = "UNITID" + i, @name = "UNITID" + i })
+                    </div>
+                    <div class="col-md-3">
+                      
+                        @Html.Label("عدد الوحدات")
+                        @Html.TextBoxFor(model => model.medFormDet[i].NUMBEROFUNITS, null, new { @class = "form-control", @id = "NUMBEROFUNITS" + i, onchange = "getTOTAL(this); GetTotalPer(this); ", @name = "NUMBEROFUNITS" + i })
+
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-3">
+                      
+                        @Html.Label("مجموع المبلغ")
+                        @Html.TextBoxFor(model => model.medFormDet[i].TOTALAMOUNT, "{0:#,###,###.##}", new { @class = "form-control", @readonly = "readonly", @id = "TOTALAMOUNTD" + i, @name = "TOTALAMOUNTD" + i, onchange = "digitGrouping(this.value)" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("نسبة الإستحقاق")
+                        @Html.TextBoxFor(model => model.medFormDet[i].ENTITLEMENTPERCENT, null, new { @class = "form-control", @id = "ENTITLEMENTPERCENT" + i, @name = "ENTITLEMENTPERCENT" + i, @Value = x, @readonly = "readonly" })
+
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("مبلغ الإستحقاق")
+                        @Html.TextBoxFor(model => model.medFormDet[i].ENTITLEMENTAMOUNT, null, new { @class = "form-control", @id = "ENTITLEMENTAMOUNT" + i, @name = "ENTITLEMENTAMOUNT" + i, @readonly = "readonly" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("المبلغ المصدق")
+                        @Html.TextBoxFor(model => model.medFormDet[i].APPROVEDAMOUNT, null, new
+               {
+                   @class = "form-control",
+                   @id = "APPROVEDAMOUNTD" + i,
+                   @name = "APPROVEDAMOUNTD" + i,
+                   onchange = "CheckTotalApproveDet(this);" })
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div> 
+    }
+
+    <br />
+    <div align="center">
+
+        <input type="submit" value="Create" id="CreateButton" class="btn btn-primary" />
+
+        <a href="/MedicalClaimForm/Index" class="btn btn-outline-info">Back to List</a>
+    </div>
+}
+<script src="~/Content/lib/jquery/dist/jquery.js"></script>
+<script src="~/Content/lib/jquery/dist/jquery.min.js"></script>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts2/Common/Common.js"></script>
+    <script src="~/Scripts2/chosen_v1.6.2/chosen.jquery.js"></script>
+    <script src="~/Scripts2/chosen_v1.6.2/prism.js"></script>
+    <link href="~/Scripts2/chosen_v1.6.2/chosen.min.css" rel="stylesheet" />
+    <link href="~/Scripts2/chosen_v1.6.2/prism.css" rel="stylesheet" />
+    <script src="~/Scripts2/Common/Common.js"></script>
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script src="~/Content/notifyAlert/mk-notifications.min.js"></script>
+    <script src="~/Content/notifyAlert/notifyAlert.js"></script>
+
+
+
+
+    <script type="text/javascript">
+
+        //(function ($) {
+        //    $(document).ready(function () {
+        //     debugger
+        //     // document.getElementById("model[0].CHEQUEDATE").value = "";
+        //     //$("#medICALCLAIMFORMDETAIL").dynamiclist({
+        //     //       withEvents: true,
+
+        //     //   });
+
+        //     var length = $("#partial").find("." + "list-item").length;
+        //        var i = 0;
+
+        //        while (i < length) {
+
+        //            $("[id = 'model[" + i + "].SERVICEFEESTYPEID']").val("");
+        //            $("[id = 'model[" + i + "].AMOUNT']").val("");
+        //            $("[id = 'model[" + i + "].UNITID']").val("");
+        //            $("[id = 'model[" + i + "].NUMBEROFUNITS']").val("");
+        //            $("[id = 'model[" + i + "].TOTALAMOUNT']").val("");
+        //            $("[id = 'model[" + i + "].ENTITLEMENTPERCENT']").val("");
+        //            $("[id = 'model[" + i + "].ENTITLEMENTAMOUNT']").val("");
+        //            i += 1;
+        //        }
+
+        //    });
+        //})(jQuery);
+        function alert2(message, title, buttonText) {
+
+            buttonText = (buttonText == undefined) ? "Ok" : buttonText;
+            title = (title == undefined) ? "The page says:" : title;
+
+            var div = $('<div>');
+            div.html(message);
+            div.attr('title', title);
+            div.dialog({
+                autoOpen: true,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                buttons: [{
+                    text: buttonText,
+                    click: function () {
+                        $(this).dialog("close");
+                        changeStatusToPrint();
+                        div.remove();
+                    }
+                }
+                    ,
+                    {
+                        text: "لا",
+                        click: function () {
+                            $(this).dialog("close");
+                            div.remove();
+                            window.location = '@Url.Action("Index")';
+                        }
+                    }
+                ]
+            });
+        }
+
+
+
+        function checkMedicalService() {
+
+
+            var _MEDICALSERVICEID = $('#MEDICALSERVICEID').val();
+            var _PATIENTEMPLOYEE = $('#PATIENTEMPLOYEE').val();
+            var _INDIVIDUALID = $('#INDIVIDUALID').val();
+
+            var input = { MEDICALSERVICEID: _MEDICALSERVICEID, PATIENTEMPLOYEE: _PATIENTEMPLOYEE, INDIVIDUALID: _INDIVIDUALID };
+
+            debugger
+            //var output;
+            $.ajax({
+
+                url: '/MedicalClaimForm/CheckMedicalService',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+                    debugger
+                    if (data === 'Exist') {
+                        Swal.fire(
+    '',
+    'الخدمة غير مسموحة لأسرة الموظف',
+    'error'
+    )
+                        //$('#CreateButton').prop("disabled", true);
+                        //$('#CreateButton').prop("readonly", true);
+                        //$('#errMsgAr').show();
+                        //alert2("الخدمة غير مسموحة لأسرة الموظف", "تأكيد", "نعم")
+                        $('#MEDICALSERVICEID').val = null
+                    }
+                    else {
+                        $('#CreateButton').prop("disabled", false);
+                        $('#CreateButton').prop("readonly", false);
+                        //$('#errMsgAr').hide();
+                    }
+                    if (data === 'Exist2') {
+                        Swal.fire(
+    '',
+    'نوع الخدمة لا ينطبق على جنس المريض',
+    'error'
+    )
+                        $('#CreateButton').prop("disabled", true);
+                        $('#CreateButton').prop("readonly", true);
+                        //alert2("نوع الخدمة لا ينطبق على جنس المريض", "تأكيد", "نعم")
+                        //$('#errMsgAr2').show();
+                    }
+                    else {
+                        //$('#errMsgAr2').hide();
+                        $('#CreateButton').prop("disabled", false);
+                        $('#CreateButton').prop("readonly", false);
+                    }
+
+                },
+
+                error: function () {
+                }
+            });
+        }
+        //function GETConsumerCeiling() {
+        //    var _INDIVIDUALID = $('#INDIVIDUALID').val()
+        //  //  var _Year = $('#Year').val()
+        //    var input = { INDIVIDUALID: _INDIVIDUALID };
+        //    //
+        //    //
+        //    debugger
+        //    $.ajax({
+        //        url: '/MedicalClaimForm/getConsumer',
+        //        type: "POST",
+        //        data: JSON.stringify(input),
+        //        dataType: "json",
+        //        contentType: "application/json; charset=utf-8",
+
+        //        success: function (data)
+        //        {
+
+        //            if (data != null) {
+        //                $("#ResidualCeiling").val(data.ResidualCeiling);
+        //                $("#ConsumerCeiling").val(data.ConsumerCeiling);
+
+        //            }
+        //            else {
+        //                $("#ResidualCeiling").val(0);
+        //                $("#ConsumerCeiling").val(0);
+        //            }
+        //        },
+        //        error: function () {
+        //        }
+        //    });
+
+
+
+        //}
+
+        //Check Total Approve Amount From MedicalClaimsForm
+
+        function CheckTotalApprove() {
+            debugger
+
+            var _ResidualCeiling = $('#ResidualCeiling').val();
+            var _APPROVEDAMOUNT = $('#APPROVEDAMOUNT').val();
+            //        if (_APPROVEDAMOUNT > _ResidualCeiling) {
+            //            // $('#lblEroMesg').show();//.prop('show', 'show');
+            //            //$('#lblEroMesg').prop("disabled", true);
+            //            //ShowFeedback('المبلغ المصدق أكبر من المتبقى لجملة سقف الموظف', 'خطأ', 'Error');
+            //            Swal.fire(
+            //'',
+            //'المبلغ المصدق أكبر من المتبقى لجملة سقف الموظف',
+            //'error'
+            //)
+            //            $('#CreateButton').prop("disabled", true);
+            //            $('#CreateButton').prop("readonly", true);
+            //        }
+            //        else {
+            //            $('#CreateButton').prop("disabled", false);
+            //            $('#CreateButton').prop("readonly", false);
+            //        }
+            input = {
+                ResidualCeiling: _ResidualCeiling,
+                APPROVEDAMOUNT: _APPROVEDAMOUNT
+            };
+            $.ajax({
+                url: '/MedicalClaimForm/CheckTotalApprove',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    if (data === true) {
+                        Swal.fire(
+   '',
+   'المبلغ المصدق أكبر من المتبقى لجملة سقف الموظف',
+   'error'
+   )
+                        $('#CreateButton').prop("disabled", true);
+                        $('#CreateButton').prop("readonly", true);
+                    }
+                    else {
+                        $('#CreateButton').prop("disabled", false);
+                        $('#CreateButton').prop("readonly", false);
+
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function GETConsumerCeiling() {
+            debugger
+
+            var _INDIVIDUALID = $('#INDIVIDUALID').val();
+            var _Years = $('#Years').val();
+            input = {
+                INDIVIDUALID: _INDIVIDUALID,
+                Years: _Years
+            };
+            $.ajax({
+                url: '/MedicalClaimForm/GetConsumerCeiling',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ConsumerCeiling').val(data);
+                    }
+                    else {
+                        $('#ConsumerCeiling').val(0);
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+
+        function CheckTotalApproveDet(_this) {
+
+            var num = _this.name.replace(/^\D+|\D+$/g, "");
+
+            debugger
+
+            var _TOTALAMOUNTD = $('#TOTALAMOUNTD' + num + '').val();
+            var _APPROVEDAMOUNTD = $('#APPROVEDAMOUNTD' + num + '').val();
+
+            input = {
+                TOTALAMOUNTD: _TOTALAMOUNTD,
+                APPROVEDAMOUNTD: _APPROVEDAMOUNTD
+            };
+            $.ajax({
+                url: '/MedicalClaimForm/CheckApproveTotalDET',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    if (data === true) {
+                        Swal.fire(
+   '',
+   'لا يسمح ان يكون المبلغ المصدق أعلى من مجموع المبلغ',
+   'error'
+   )
+                        $('#CreateButton').prop("disabled", true);
+                        $('#CreateButton').prop("readonly", true);
+                    }
+                    else {
+                        $('#CreateButton').prop("disabled", false);
+                        $('#CreateButton').prop("readonly", false);
+
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function GETResidualCeiling() {
+            debugger
+
+            var _INDIVIDUALID = $('#INDIVIDUALID').val();
+            var _Years = $('#Years').val();
+
+            input = {
+                INDIVIDUALID: _INDIVIDUALID,
+                Years: _Years
+            };
+
+            $.ajax({
+                url: '/MedicalClaimForm/GetResidualCeiling',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    if (data != null) {
+                        $('#ResidualCeiling').val(data);
+                    }
+                    else {
+                        $('#ResidualCeiling').val(0);
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function getpartialDiv() {
+            debugger
+            var childnumber = $('#number').val();
+            input = { 'Number': childnumber };
+            $.ajax({
+                url: '@Url.Action("getpartialDiv", "MedicalClaimForm")',
+                type: 'post',
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    document.getElementById("partial").innerHTML = data;
+                },
+                error: function (err) {
+                    console.log("ajax failure (links permisoins): " + err.val());
+                }
+            });
+        }
+
+
+        function getStructure() {
+            var _INDIVIDUALID = $('#INDIVIDUALID').val()
+            var input = { INDIVIDUALID: _INDIVIDUALID };
+            debugger
+
+            $.ajax({
+
+                url: '/MedicalClaimForm/getStruc',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    $("#MAINORGANISATIONID").val(data.MAINORGANISATIONID);
+                    $("#ORGANISATIONID").val(data.ORGANISATIONID);
+                    $("#DEPARTMENTID").val(data.DEPARTMENTID);
+                    $("#SECTIONID").val(data.SECTIONID);
+
+
+                },
+                error: function () {
+                }
+            });
+        }
+
+
+        function getPATIENTID(id) {
+            debugger
+            var PATIENTEMPLOYEE = $('#PATIENTEMPLOYEE').val();
+            if (PATIENTEMPLOYEE == "No") {
+
+                var _INDIVIDUALID = $('#INDIVIDUALID').val()
+                var input = { INDIVIDUALID: _INDIVIDUALID };
+                $('#PATIENTID').prop("readonly", false);
+                GetDropDown(input, "/MedicalClaimForm/getSponsors", "PATIENTID", " ", true);
+
+            }
+            else if (PATIENTEMPLOYEE == "Yes") {
+
+                var _INDIVIDUALID = $('#INDIVIDUALID').val()
+                var input = { INDIVIDUALID: _INDIVIDUALID };
+                $('#PATIENTID').prop("readonly", true);
+                GetDropDown(input, "/MedicalClaimForm/getEmpName", "PATIENTID", " ", true);
+
+            }
+        }
+
+
+        //function getTOTAL() {
+        //    var Amount = $('AMOUNT').val();
+        //    var NoUnit = $('NUMBEROFUNITS').val();
+        //    var TotalAmount = Amount * NoUnit;
+        //    $('TOTALAMOUNT') = TotalAmount;
+        //}
+
+        //$(document).ready(function () {
+
+
+        //    });
+        function getTOTAL(_this) {
+            // alert(_this + "");
+            debugger
+            var num = _this.name.replace(/^\D+|\D+$/g, "");
+            //alert(num + " ");
+
+            var _AMOUNT = $('#AMOUNT' + num + '').val();
+            var _NUMBEROFUNITS = $('#NUMBEROFUNITS' + num + '').val();
+
+            var input = { AMOUNT: _AMOUNT, NUMBEROFUNITS: _NUMBEROFUNITS };
+
+            $.ajax({
+
+                url: '/MedicalClaimForm/GetTOTAL',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+                    if (data != null) {
+                        $('#TOTALAMOUNTD' + num + '').val(data);
+                        $('#APPROVEDAMOUNTD' + num + '').val(data);
+                        // $('#TOTALAMOUNT').val(data);
+                    }
+                    else {
+                        $('#TOTALAMOUNTD').val("");
+                        $('#APPROVEDAMOUNTD').val("");
+                    }
+                },
+
+
+                error: function () {
+                }
+            });
+        }
+
+        function GetTotalPer(_this) {
+            // alert(_this + "");
+            debugger
+            var num = _this.name.replace(/^\D+|\D+$/g, "");
+            //alert(num + " ");
+
+            var _AMOUNT = $('#AMOUNT' + num + '').val();
+            var _NUMBEROFUNITS = $('#NUMBEROFUNITS' + num + '').val();
+
+            var input = { AMOUNT: _AMOUNT, NUMBEROFUNITS: _NUMBEROFUNITS };
+
+            $.ajax({
+
+                url: '/MedicalClaimForm/GetTotalPer',
+                type: "POST",
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+                    if (data != null) {
+                        $('#ENTITLEMENTAMOUNT' + num + '').val(data);
+                        // APPROVEDAMOUNT
+                        $('#APPROVEDAMOUNT' + num + '').val(data);
+                        // $('#TOTALAMOUNT').val(data);
+                    }
+                    else {
+                        $('#ENTITLEMENTAMOUNT').val("");
+                        $('#APPROVEDAMOUNT').val("");
+                    }
+                },
+
+                error: function () {
+                }
+            });
+        }
+        function GetDropDown(input, url, targetId, defaultValue, withdefaultValue) {
+            var target = $('select[name="' + targetId + '"]');
+            //var target = $('#' + targetId);
+            $.ajax({
+                url: url,
+                type: "POST",
+                traditional: true,
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    target.empty();
+                    if (withdefaultValue)
+                        target.append("<option value='" + 0 + "'>" + defaultValue + " </option>");
+                    $(data).each(function () {
+                        $(document.createElement('option'))
+                .attr('value', this.Value)
+                .text(this.Text)
+                .appendTo(target);
+                    });
+
+                    return;
+
+                },
+                error: function () {
+                    return;
+                }
+            });
+
+
+        }
+
+
+        //added by aa
+        /*this function i use to  check if the sum of the amounts of the details is equal to the amount entered in the transaction
+        and if not i use this function to disable/and enable the save button + give a warning.*/
+
+        ////
+        function getXsum(_this) {
+            //var num = _this.name.replace(/^\D+|\D+$/g, "");
+            debugger
+            var count = new Number;
+            var checkNOF = document.getElementById('number').value;
+            var originalamount = document.getElementById('TOTALCLAIMAMOUNT').value;
+           // var wishbutton2 = document.getElementById('TOTALAMOUNTD'+i+'');
+
+
+            var finalsum = new Number;
+            var getamount = new Number;
+            var temp = removeCommas(originalamount);
+            var test = $("[id= 'TOTALAMOUNTD[0]']").val();
+            //var test = $("[id = 'details[0].AMOUNT']").val();
+
+            if (checkNOF != null) {
+                count = checkNOF;
+            } else {
+                count = 0;
+            }
+            for (var i = 0; i < checkNOF; i++) {
+
+                // var testt = removeCommas($("[id = 'details[" + i + "].AMOUNT']").val());
+                var testt = removeCommas($("[id = 'TOTALAMOUNTD[" + i + "]']").val());
+                //var _AMOUNT = $('#AMOUNT' + num + '').val();
+                var abstractvalue = parseFloat(testt);
+                getamount = parseFloat(abstractvalue + getamount);
+
+            }
+
+
+            if (getamount > temp) {
+
+
+                Swal.fire(
+  '',
+  'لا يسمح ان يكون مجموع المبلغ أكبر من جملة مبلغ العلاج',
+  'error'
+  )
+               // ShowFeedback('تحذير', 'يجب أن يتساوى مجموع القيم بالمبلغ', 'Warning');
+                $("#AMOUNT").val();
+                CreateButton.disabled = true;
+
+            } else {
+                HideFeedback();
+                CreateButton.disabled = false;
+
+            }
+        }
+        ////
+
+        //added by aa
+        /*the next three functions for adding a comma after three digits.*/
+
+
+        ////
+
+        function removeCommas(str) {
+            while (str.search(",") >= 0) {
+                str = (str + "").replace(',', '');
+            }
+            return str;
+        }
+        function groupingExecute(vlue) {
+            var auth = vlue.toString("{0:##,##.##}");
+            var offset = vlue.length % 3;
+            if (offset == 0)
+                auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/([0-9]{3})(?=[0-9]+)/g, "$1,");
+            else
+                auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/([0-9]{3})/g, ",$1");
+
+            return auth;
+        }
+        ////
+
+        function addCommas(x) {
+            var parts = x.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return parts.join(",");
+        }
+
+
+        function digitGrouping(id) {
+            var final = "";
+            var temp = "";
+            var vlue = $('#' + id).val();
+            var res = vlue.split(".");
+            if (res.length === 1) {
+                temp = removeCommas(vlue);
+                final = groupingExecute(temp);
+            }
+            else {
+                temp = removeCommas(res[0]);
+                final = groupingExecute(temp);
+                temp = removeCommas(res[1]);
+                final = final + "." + groupingExecute(temp);
+            }
+            //auth = auth.replace(/,/g, "");
+            $('#' + id).val(final);
+        }
+        //////////////////////
+
+
+        function ShowFeedback(message, type, messageStyle) {
+            var massage = "<div class='alert alert-" + messageStyle.toString().toLowerCase() + "'> <a href='#' class='close' data-dismiss='alert'>&times;</a> <strong>" + type + "! </strong> " + message + ". </div>";
+            $('#FeedbackMassage').html(massage);
+            notifyAlert(message, messageStyle, type);
+
+        }
+
+        function GetSum() {
+            if(sum=="Grat")
+            {
+                Swal.fire(
+                  '',
+                  'لا يسمح ان يكون مجموع المبلغ أكبر من جملة مبلغ العلاج',
+                  'error'
+                  )
+
+                CreateButton.disabled = true;
+            }
+        }
+
+        var message = '@message';
+        if (message)
+            alert(message);
+    </script>
+}

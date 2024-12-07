@@ -1,0 +1,44 @@
+﻿@model MedicalTreatment.Models.GENERALCEILING
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>السقف العـــــام</h2>
+
+
+<fieldset class="card shadow w-50 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+    <div class="alert alert-info">
+        <b> @Html.DisplayNameFor(model => model.YEAR) </b>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.YEAR)
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <b>@Html.DisplayNameFor(model => model.CEILING)</b>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CEILING)
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <b>  @Html.DisplayNameFor(model => model.STATUS)</b>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.STATUS)
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <b> @Html.DisplayNameFor(model => model.LASTUPDATED)</b>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.LASTUPDATED)
+        </div>
+    </div>
+</fieldset>
+<p class="mt-3 d-flex justify-content-end w-50">
+    <a href="/GeneralCeiling/Index" class="btn btn-outline-info mx-2"> رجوع</a>
+    <a href="/GeneralCeiling/Edit/@Model.ID" type="submit" class="btn btn-success"> تعديل</a>
+</p>

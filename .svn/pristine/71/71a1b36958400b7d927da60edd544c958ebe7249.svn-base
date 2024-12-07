@@ -1,0 +1,13 @@
+﻿legend {
+    display: block;
+    width: auto !important;
+    max-width: 100%;
+    padding: 0;
+    background: #fff !important;
+    margin-bottom: 0.5rem;
+    border-radius: 5px !important;
+    font-size: 1.5rem;
+    line-height: inherit;
+    color: inherit;
+    /* white-space: normal; */
+}

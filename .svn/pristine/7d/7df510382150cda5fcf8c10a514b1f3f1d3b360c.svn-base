@@ -1,0 +1,211 @@
+﻿@model IPagedList<MedicalTreatment.Models.ORGANIZATIONSTRUCTURE>
+@using PagedList;
+@using PagedList.Mvc;
+@using MedicalTreatment.Models
+@{
+    ViewBag.Title = "Index";
+    Entities db = new Entities();
+}
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+<h2 class="btn btn-outline-dark d-flex justify-content-center">تفاصيل هيكل المؤسسة</h2>
+
+<p>
+    <a href="/OrganizationStructure/Create" class="btn btn-facebook">اضافة</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+@using (Html.BeginForm("Index", "StructureCodes", FormMethod.Get))
+{
+    <div style="margin-bottom:20px" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" style="width: 300px; margin-bottom: 10px" />
+        <input type="submit" name="submit" value="بحث " class="btn btn-outline-primary" />
+    </div>
+}
+<div class="table-responsive">
+    <table class="table table-border table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.Label("الهيكل")
+                </th>
+                <th>
+                    @Html.Label("طبيعة الهيكل")
+                </th>
+                <th>
+                    @Html.Label("الأسم")
+                </th>
+                <th>
+                    @Html.Label("اللأسم بالأنجليزي")
+                </th>
+              
+               
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE2.NAME)
+                    </td>
+                    
+                        @*@{ 
+                            if (item.STRUCTURECODEID != null)
+                            {
+                                int na = item.STRUCTURECODEID;
+                                var name = db.STRUCTURECODES.Where(a => a.ID == na).SingleOrDefault().NAME;
+                            <td>
+                                @name
+                            </td>
+                        }
+                        else
+                        {*@
+
+                            @*}
+                        }*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STRUCTURECODEID)
+
+
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMEEN)
+                    </td>
+                   
+                   
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-outline-warning" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-outline-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "OrganizationStructure", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>
+
+
+<link href="~/Scripts/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $("#sortedtable").DataTable();
+</script>
+
+
+@*@model IEnumerable<MedicalTreatment.Models.ORGANIZATIONSTRUCTURE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE2.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STRUCTURECODEID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAMEEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATUS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LASTUPDATED)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE2.NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STRUCTURECODEID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAMEEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LASTUPDATED)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>*@

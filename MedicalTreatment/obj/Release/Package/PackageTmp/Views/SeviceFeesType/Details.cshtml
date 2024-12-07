@@ -1,0 +1,51 @@
+﻿@model MedicalTreatment.Models.SERVICEFEESTYPE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-money-bill-wave"></i> انواع رسوم الخدمات</h4>
+</div>
+
+<fieldset class="card shadow mx-auto w-75 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+    <div class="row">
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b>  الاسم بالعربي    </b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAME)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info">
+            <b>الاسم بالانجليزي</b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info">
+            <b>  الحالة</b>
+            <div class="">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info">
+            <b>  آخر تحديث</b>
+            <div>
+                @Html.DisplayFor(model => model.LASTUPDATED)
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+<p class="mt-3 d-flex justify-content-end mx-auto w-75">
+    <a href="/SeviceFeesType/Index" class="btn btn-outline-info mx-2"> رجوع</a>
+    <a href="/SeviceFeesType/Edit/@Model.ID" type="submit" class="btn btn-success"> تعديل</a>
+
+</p>

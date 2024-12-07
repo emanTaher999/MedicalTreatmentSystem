@@ -1,0 +1,153 @@
+﻿@model IEnumerable<MedicalTreatment.Models.MEDICALDETAILSERVICE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">  تفاصيل  الخدمات الطبية </h2>
+
+
+
+<p>
+    <a href="/MedicalDetailService/Create" class="btn btn-facebook">اضافة</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+
+<div class="table-responsive">
+    <table class="table table-border table-hover border" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MEDICALSERVICE.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NAMEEN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SERVICEINCLUDE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CEILINGTYPE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.INPATIENT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OUTPATIENT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OUTOFNETWORK)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PREAPPROVE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.STATUS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LASTUPDATED)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MEDICALSERVICE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMEEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SERVICEINCLUDE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CEILINGTYPE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.INPATIENT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OUTPATIENT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OUTOFNETWORK)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PREAPPROVE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LASTUPDATED)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-outline-warning" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-outline-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                </tr>
+            }
+
+    </table>
+</div>

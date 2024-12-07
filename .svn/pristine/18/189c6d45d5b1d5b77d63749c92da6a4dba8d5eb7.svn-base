@@ -1,0 +1,52 @@
+﻿@model MedicalTreatment.Models.GENERALCEILING
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>السقف العــــام</h2>
+
+<h5>هل انت متأكد لحذف البيانات?</h5>
+<fieldset class="card shadow  w-50 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+
+    <div class="alert alert-info">
+        <b> @Html.DisplayNameFor(model => model.YEAR)</b>
+        <div class="">
+            @Html.DisplayFor(model => model.YEAR)
+        </div>
+    </div>
+    <div class="alert alert-info">
+        <b>
+            @Html.DisplayNameFor(model => model.CEILING)
+        </b>
+            <div class="">
+                @Html.DisplayFor(model => model.CEILING)
+            </div>
+    </div>
+    <div class="alert alert-info">
+        <b>
+            @Html.DisplayNameFor(model => model.STATUS)
+        </b>
+            <div class="">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>
+    </div>
+    <div class="alert alert-info">
+        <b>@Html.DisplayNameFor(model => model.LASTUPDATED)</b>
+            
+            <div>
+                @Html.DisplayFor(model => model.LASTUPDATED)
+            </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<p class="mt-3  d-flex justify-content-end w-50">
+    <a href="/GeneralCeiling/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+    <input type="submit" class="btn btn-danger" value="حذف" />
+</p>
+}

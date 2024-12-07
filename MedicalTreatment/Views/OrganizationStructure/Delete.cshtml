@@ -1,0 +1,159 @@
+﻿@model MedicalTreatment.Models.ORGANIZATIONSTRUCTURE
+
+    @{
+        ViewBag.Title = "Delete";
+    }
+
+   <div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>تفاصيل هيكل المؤسسة</h4>
+</div>
+<br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+            <fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.Label("طبيعة الهيكل")
+                <div>
+                    @Html.DropDownListFor(model => model.STRUCTURECODEID, ViewBag.StructureCodId as SelectList, "---أختر---", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.STRUCTURECODEID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("الهيكل")
+                <div>
+                    @Html.DropDownListFor(model => model.PARENTID.Value, ViewBag.PARENTID as SelectList, "---أختر---", new { @class = "form-control", @id = "PARENTID", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.PARENTID)
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                @Html.Label("الأسم")
+                <div>
+                    @Html.TextBoxFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAME)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("اللأسم بالأنجليزي")
+                <div>
+                    @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAMEEN)
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.STATUS)
+            @Html.HiddenFor(model => model.LASTUPDATED)
+
+
+
+        </div>
+
+                <p class="mt-3">
+                    <input type="submit" class="btn btn-success" value="حذف" />
+
+                    <a href="/OrganizationStructure/Index" class="btn btn-outline-info">عودة للقائمة</a>
+                </p>
+                </fieldset>
+    }
+    <script src="~/Scripts/chosen_v1.6.2/chosen.jquery.js"></script>
+    <script src="~/Scripts/chosen_v1.6.2/prism.js"></script>
+    <link href="~/Scripts/chosen_v1.6.2/chosen.min.css" rel="stylesheet" />
+    <link href="~/Scripts/chosen_v1.6.2/prism.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $("#PARENTID").chosen();
+        });
+
+    </script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+
+
+
+@*@model MedicalTreatment.Models.ORGANIZATIONSTRUCTURE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>تفاصيل هيكل المؤسسة</h4>
+</div>
+
+
+<fieldset class="card shadow mx-auto  w-75 p-4" dir="rtl">
+    <h5 style="color : orangered;">هل انت متأكد لحذف البيانات?</h5>
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+    <div class="row">
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> طبيعة الهيكل    </b>
+            <div class="">
+                @Html.DisplayFor(model => model.STRUCTURECODEID)
+            </div>
+        </div>
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> الهيكل</b>
+            <div class="">
+                @Html.DisplayFor(model => model.PARENTID.Value)
+            </div>
+        </div>
+        <div class="alert col-md-5 mx-4 alert-info">
+            <b>  الأسم    </b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAME)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> الاسم بالانجليزي</b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b>  الحالة</b>
+            <div class="">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> آخر تحديث</b>
+            <div>
+                @Html.DisplayFor(model => model.LASTUPDATED)
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p class="mt-3  d-flex justify-content-end mx-auto w-75">
+        <a href="/OrganizationStructure/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+
+        <input type="submit" class="btn btn-danger" value="حذف" />
+    </p>
+}*@
+
+
+
+
+
+
+
+
+
+
+
+

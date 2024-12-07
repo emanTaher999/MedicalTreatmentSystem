@@ -1,0 +1,81 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">     الخدمات الطبية </h2>
+
+<fieldset class="card shadow w-50 p-4" dir="rtl">
+    <legend>MEDICALSERVICE</legend>
+    <legend class="bg-custom shadow  px-3">Details</legend>
+
+
+    <div class="alert alert-info ">
+        <b>  Name   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.NAME)
+        </div>
+    </div>
+
+    <div class="alert alert-info ">
+        <b>  NAMEEN   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.NAMEEN)
+        </div>
+    </div>
+
+
+
+    <div class="alert alert-info ">
+        <b>  SERVICEINCLUDE   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.SERVICEINCLUDE)
+        </div>
+    </div>
+
+
+    <div class="alert alert-info ">
+        <b>  APPLICABLEFOR   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.APPLICABLEFOR)
+        </div>
+    </div>
+
+    <div class="alert alert-info ">
+        <b>  CEILINGTYPE   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.CEILINGTYPE)
+        </div>
+    </div>
+
+
+    <div class="alert alert-info ">
+        <b>  LIMITSERVICE   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.LIMITSERVICE)
+        </div>
+    </div>
+
+
+    <div class="alert alert-info ">
+        <b>  STATUS   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.STATUS)
+        </div>
+    </div>
+
+    <div class="alert alert-info ">
+        <b>  LASTUPDATED   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.LASTUPDATED)
+        </div>
+    </div>
+
+  
+</fieldset>
+<p class="mt-3 d-flex justify-content-end mx-auto w-75">
+    <a href="/MedicalServices/Index" class="btn btn-outline-info mx-2"> رجوع</a>
+    <a href="/MedicalServices/Edit/@Model.ID" type="submit" class="btn btn-success"> تعديل</a>
+
+</p>

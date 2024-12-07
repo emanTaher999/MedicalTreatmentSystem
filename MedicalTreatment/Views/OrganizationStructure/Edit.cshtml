@@ -1,0 +1,80 @@
+﻿@model MedicalTreatment.Models.ORGANIZATIONSTRUCTURE
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>تفاصيل هيكل المؤسسة</h4>
+</div>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تعديل</legend>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("طبيعة الهيكل")
+            <div>
+                @Html.DropDownListFor(model => model.STRUCTURECODEID, ViewBag.StructureCodId as SelectList, "---أختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.STRUCTURECODEID)
+            </div>
+        </div>
+        @*new SelectList( ViewBag.PARENTID ,"Value","Text", Model.PARENTID)*@
+        <div class="col-md-3">
+            @Html.Label("الهيكل")
+            <div>
+                @Html.DropDownListFor(model => model.PARENTID,null , "---أختر---", new { @class = "form-control", @id = "PARENTID",@Value = Model.PARENTID })
+                @Html.ValidationMessageFor(model => model.PARENTID)
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            @Html.Label("الأسم")
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("اللأسم بالأنجليزي")
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.STATUS)
+        @Html.HiddenFor(model => model.LASTUPDATED)
+
+
+
+    </div>
+        <p class="mt-3">
+            <input type="submit" class="btn btn-success" value="تعديل" />
+
+            <a href="/OrganizationStructure/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        </p>
+  
+        </fieldset>
+}
+<script src="~/Scripts/chosen_v1.6.2/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen_v1.6.2/prism.js"></script>
+<link href="~/Scripts/chosen_v1.6.2/chosen.min.css" rel="stylesheet" />
+<link href="~/Scripts/chosen_v1.6.2/prism.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function () {
+        $("#PARENTID").chosen();
+    });
+
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+

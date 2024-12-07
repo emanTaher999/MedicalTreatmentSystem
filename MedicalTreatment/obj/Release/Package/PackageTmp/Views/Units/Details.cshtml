@@ -1,0 +1,76 @@
+﻿@model MedicalTreatment.Models.UNIT
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2> وحدات القياس</h2>
+<fieldset class="card shadow w-100 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+
+    <div class="row my-2">
+        <div class="col-md-4">
+
+            <div class="alert alert-info ">
+                <b>  @Html.DisplayNameFor(model => model.NAME)   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAME)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="alert alert-info ">
+                <b>@Html.DisplayNameFor(model => model.NAMEEN)   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAMEEN)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="alert alert-info ">
+                <b>@Html.DisplayNameFor(model => model.ID)  </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.ID, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ID)
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <div class="row my-2">
+        <div class="col-md-6">
+            <div class="alert alert-info ">
+                <b>  @Html.DisplayNameFor(model => model.STATUS) </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.STATUS, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.STATUS)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info ">
+                <b>  @Html.DisplayNameFor(model => model.LASTUPDATED) </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.LASTUPDATED, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.LASTUPDATED)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div align="center">
+        <a href="/Units/Index" class="btn btn-outline-info">رجوع</a>
+    </div>
+
+
+</fieldset>
+
+@*<p>
+        |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

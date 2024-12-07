@@ -1,0 +1,47 @@
+﻿@model MedicalTreatment.Models.OCCUPATION
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i> المهنة</h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+      <fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تعديل</legend>
+    <div class="row my-2">
+        <div class="col-md-4">
+            @Html.Label("الاسم")
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.Label("الاسم بالانجليزي")
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+    </div>
+
+    <div align="center">
+
+        <input type="submit" value="تعديل" class="btn btn-success" />
+        <a href="/Occupation/Index" class="btn btn-outline-info">عودة للقائمة  </a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+</fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

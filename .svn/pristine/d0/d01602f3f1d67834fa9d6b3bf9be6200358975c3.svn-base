@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86c22f3fbdbc438080e6f35ff2970611" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="Model.COMPANYPOLICY" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GENERALCEILING" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OCCUPATION" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ORGANIZATIONPROFILE" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ORGANIZATIONSTRUCTURE" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RELATION" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.STRUCTURECODE" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FKCOMPANYPOLICYORGSTRUCTURE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKORGANIZATIONPROFILESTRUCTURE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FKORGANIZATIONSTRUCTUREPARENT" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.JOBTITLE" Width="1.5" PointX="3.75" PointY="19.125" />
+        <EntityTypeShape EntityType="Model.CARD" Width="1.5" PointX="8.25" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.SUPPLIER" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SUPPLIERTYPE" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.UNIT" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.MEDICALDETAILSERVICE" Width="1.5" PointX="12.625" PointY="4" />
+        <EntityTypeShape EntityType="Model.MEDICALSERVICECEILING" Width="1.5" PointX="14.875" PointY="4.5" />
+        <EntityTypeShape EntityType="Model.MEDICALSERVICE" Width="1.5" PointX="10.375" PointY="4.25" />
+        <AssociationConnector Association="Model.FKMEDICALDETSERVMEDSERV" />
+        <AssociationConnector Association="Model.FKMEDICALSERVCEILFORMEDDETSER" />
+        <AssociationConnector Association="Model.FKMEDICALSERVCEILFORMED" />
+        <EntityTypeShape EntityType="Model.INDIVIDUAL" Width="1.5" PointX="6" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.SERVICEFEESTYPE" Width="1.5" PointX="5.375" PointY="4.75" />
+        <AssociationConnector Association="Model.FKCARDINDIVIDUAL" />
+        <AssociationConnector Association="Model.FKINDIVIDUALJOBTITLE" />
+        <AssociationConnector Association="Model.FKINDIVIDUALOCCUPATION" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSMAININDV" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCDEPT" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCMAIN" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCORG" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSORGSTRUCSECT" />
+        <AssociationConnector Association="Model.FKINDIVIDUALSRELATION" />
+        <EntityTypeShape EntityType="Model.MEDICALCLAIMFORM" Width="1.5" PointX="14.875" PointY="8" />
+        <EntityTypeShape EntityType="Model.MEDICALCLAIMFORMDETAIL" Width="1.5" PointX="17.125" PointY="6.125" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMINDV" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMDETMEDFRM" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMINDVDEPT" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMINDVORG" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMINDVSECT" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMMAINORG" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMMEDDETSERV" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMMEDSERV" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMDETSERVFEE" />
+        <AssociationConnector Association="Model.FKMEDICALCLAIMFORMDETUNIT" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

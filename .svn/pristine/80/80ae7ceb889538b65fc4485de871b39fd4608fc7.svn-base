@@ -1,0 +1,57 @@
+﻿@model MedicalTreatment.Models.COMPANYPOLICY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">   لائحة الشركة العامة </h2>
+
+    <fieldset class="card shadow w-50 p-4" dir="rtl">
+        <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.EFFECTDATE)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.EFFECTDATE)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.EMPLOYEESAMECEILING)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.EMPLOYEESAMECEILING)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.COVERAGEPERCENT)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.COVERAGEPERCENT)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.STATUS)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.STATUS)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.LASTUPDATED)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.LASTUPDATED)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("تعديل", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("عودة للقائمة  ", "Index")
+    </p>

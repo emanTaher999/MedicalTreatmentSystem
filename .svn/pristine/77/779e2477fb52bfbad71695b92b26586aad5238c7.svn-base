@@ -1,0 +1,42 @@
+﻿@model MedicalTreatment.Models.OCCUPATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<fieldset>
+   
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NAMEEN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAMEEN)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STATUS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STATUS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LASTUPDATED)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LASTUPDATED)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

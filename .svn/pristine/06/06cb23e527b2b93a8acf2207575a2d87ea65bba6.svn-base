@@ -1,0 +1,72 @@
+﻿@model MedicalTreatment.Models.SUPPLIERTYPE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+انواع مقدمى الخدمة
+
+<h3>هل  تريد حذف هذا السجل؟</h3>
+<fieldset class="card shadow w-100 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+
+
+    <div class="row my-2">
+        <div class="col-md-6">
+
+            <div class="alert alert-info ">
+                <b>  @Html.Label("الاسم")   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAME)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div class="alert alert-info ">
+                <b> @Html.Label("الاسم بالانجليزية")   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.NAMEEN)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info ">
+                <b>  @Html.LabelFor(model => model.STATUS) </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.STATUS, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.STATUS)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info ">
+                <b>  @Html.LabelFor(model => model.LASTUPDATED) </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.LASTUPDATED, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.LASTUPDATED)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <p class="mt-3  d-flex justify-content-end w-50">
+                <a href="/SupplierTypes/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+
+                <input type="submit" class="btn btn-danger" value="حذف" />
+            </p>
+        }
+   
+
+
+</fieldset>

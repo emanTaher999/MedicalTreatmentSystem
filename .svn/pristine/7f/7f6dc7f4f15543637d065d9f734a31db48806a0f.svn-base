@@ -1,0 +1,119 @@
+﻿@model MedicalTreatment.Models.COMPANYPOLICY
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center"> لائحة الشركة</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+
+                @Html.HiddenFor(model => model.ID)
+                <div class="col-md-4">
+                    @Html.Label("هيكاية المنظمة ")
+                    @*@Html.LabelFor(model => model.ORGANIZATIONID)*@
+                    <div>
+                        @*@Html.DropDownList("ORGANIZATIONID", String.Empty)*@
+                        @Html.DropDownListFor(model => model.ORGANIZATIONID, ViewBag.ORGANIZATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ORGANIZATIONID)
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.Label("تاريخ البدأ")
+
+                    <div>
+                        @Html.TextBoxFor(model => model.EFFECTDATE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EFFECTDATE)
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                    @Html.Label("سقف الموظفين")
+
+                    <div>
+                   
+
+
+                        @Html.DropDownListFor(model => model.EMPLOYEESAMECEILING, new List<SelectListItem>{ new SelectListItem{
+                      Text="Yes",
+                      Value = "Yes"
+                  },
+       new SelectListItem{
+                      Text="No",
+                      Value = "No"
+                  }}, "---اختر---", new { @class = "form-control" })
+                        @Html.ValidationMessage("EMPLOYEESAMECEILING")
+
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-4">
+                    @Html.Label("سقف الموظفين")
+
+                    <div>
+                        @Html.TextBoxFor(model => model.EMPLOYEESAMECEILING, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EMPLOYEESAMECEILING)
+                    </div>
+                </div>*@
+                @*<div class="row my-2">*@
+
+                <div class="col-md-4">
+                    @Html.Label(" نسبة التغطية")
+
+                    <div>
+                        @Html.TextBoxFor(model => model.COVERAGEPERCENT, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.COVERAGEPERCENT)
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-4">
+            @Html.Label(" الحالة")
+
+            <div>
+                @Html.EditorFor(model => model.STATUS, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.STATUS)
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            @Html.Label("اخر تحديث")
+
+            <div>
+                @Html.TextBoxFor(model => model.LASTUPDATED, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LASTUPDATED)
+            </div>
+        </div>*@
+            </div>
+                    @Html.HiddenFor(model => model.STATUS)
+                    @Html.HiddenFor(model => model.LASTUPDATED)
+
+
+                </div>
+            </div>
+        @*</div>*@
+    
+            <div align="center">
+
+                <input type="submit" value="تعديل" class="btn btn-success" />
+                <a href="/CompanyPolicy/Index" class="btn btn-outline-info">عودة للقائمة  </a>
+                @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+            </div>
+
+            
+            }
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }

@@ -1,0 +1,109 @@
+﻿@model MedicalTreatment.Models.CARD
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>البطاقات</h2>
+
+@using (Html.BeginForm("Edit", "Cards", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تعديل</legend>
+
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CARDNUMBER)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.CARDNUMBER, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CARDNUMBER)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INDIVIDUALID, "INDIVIDUAL")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("INDIVIDUAL", null, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.INDIVIDUALID)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ISSUEDATE)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ISSUEDATE, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(model => model.ISSUEDATE)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EXPIRYDATE)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.EXPIRYDATE, new { @class = "form-control", @type = "date" })
+                @Html.ValidationMessageFor(model => model.EXPIRYDATE)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NOTE)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.NOTE, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NOTE)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PRINTCOUNT)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.PRINTCOUNT, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PRINTCOUNT)
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.PHOTO)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="file" class="form-control" />
+                @*@Html.TextBoxFor(model => model.PHOTO, new { @class = "form-control", @type = "file" ,@id = "Photo" })*@
+                @Html.ValidationMessageFor(model => model.PRINTCOUNT)
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <img src="/Cards/RetrieveImage/@Model.ID" class="shadow rounded mt-3" height="200" width="200" />
+
+        </div>
+    </div>
+    <p>
+        <a href="/Cards/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        <input type="submit" class="btn btn-success" value="تعديل" />
+    </p>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

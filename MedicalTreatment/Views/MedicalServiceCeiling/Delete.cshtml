@@ -1,0 +1,72 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICECEILING
+
+@{
+    ViewBag.Title = "Deleted";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>سقف الخدمات الطبية</h4>
+</div>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="card p-4 shadow">
+        <legend class="bg-custom shadow  px-3">حذف</legend>
+
+        @Html.HiddenFor(model => model.ID)
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("الخدمة الطبية")
+                <div>
+                    @Html.DropDownList("MEDICALSERVICEID", null, "---اختر---", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.MEDICALSERVICEID)
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                @Html.Label("التفاصيل الطبية")
+                <div>
+                    @Html.DropDownList("MEDICALDETAILSERVICEID", null, "---اختر---", new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.MEDICALDETAILSERVICEID)
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                @Html.Label("السنة")
+                <div>
+                    @Html.TextBoxFor(model => model.YEAR, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.YEAR)
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                @Html.Label("السقف")
+                <div>
+                    @Html.TextBoxFor(model => model.CEILING, new { @class = "form-control",@disabled="disabled" })
+                    @Html.ValidationMessageFor(model => model.CEILING)
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <p class="mt-3">
+            <input type="submit" value="حذف" class="btn btn-primary" />
+            <a href="/MedicalServiceCeiling/Index" class="btn btn-outline-info">رجوع الى القائمة</a>
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

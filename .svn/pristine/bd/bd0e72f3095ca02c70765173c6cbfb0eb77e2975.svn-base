@@ -1,0 +1,219 @@
+﻿@using MedicalTreatment.Models;
+@model List<MedicalTreatment.Models.INDIVIDUAL>
+
+@{
+    var FamilyData = Model.ToArray();
+    var number = ViewBag.childnumber;
+    var childnumber = number;
+    if (childnumber == null)
+    {
+        childnumber = 0;
+    }
+}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/datepicker.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/Content/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/Content/css/Custom.css" rel="stylesheet" />
+</head>
+@for (int i = 0; i < Model.ToArray().Length; i++)
+{
+    <div class="card p-4 shadow mt-3">
+        <legend class="bg-custom shadow  px-3">تفاصيل المكفولين</legend>
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].NAME)
+                <div>
+                    @Html.TextBoxFor(model => FamilyData[i].NAME, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].NAME)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].NAMEEN)
+                <div>
+                    @Html.TextBoxFor(model => FamilyData[i].NAMEEN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].NAMEEN)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].BIRTHDATE)
+                <div>
+                    @Html.TextBoxFor(model => FamilyData[i].BIRTHDATE, new { @class = "form-control", @type = "Date" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].BIRTHDATE)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].GENDER)
+                <div>
+                    @Html.DropDownListFor(model => FamilyData[i].GENDER, new List<SelectListItem>{ new SelectListItem{
+                Text="ذكر",
+                Value = "Male"
+            },
+ new SelectListItem{
+                Text="انثى",
+                Value = "Female"
+            }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].GENDER)
+                </div>
+            </div>
+
+
+
+        </div>
+        @*<div class="row my-2">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].MAINORGANISATIONID, "ORGANIZATIONSTRUCTURE1")
+                <div>
+                    @Html.DropDownListFor(model => model[i].MAINORGANISATIONID, ViewBag.MAINORGANISATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].MAINORGANISATIONID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].ORGANISATIONID, "ORGANIZATIONSTRUCTURE2")
+                <div>
+                    @Html.DropDownListFor(model => model[i].ORGANISATIONID, ViewBag.ORGANISATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].ORGANISATIONID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].DEPARTMENTID, "ORGANIZATIONSTRUCTURE")
+                <div>
+                    @Html.DropDownListFor(model => model[i].DEPARTMENTID, ViewBag.DEPARTMENTID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].DEPARTMENTID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].SECTIONID, "ORGANIZATIONSTRUCTURE3")
+                <div>
+                    @Html.DropDownListFor(model => model[i].SECTIONID, ViewBag.SECTIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].SECTIONID)
+                </div>
+            </div>
+        </div>*@
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].MARITALSTATUS)
+                <div>
+                    @Html.DropDownListFor(model => FamilyData[i].MARITALSTATUS, new List<SelectListItem>{ new SelectListItem{
+                Text="متزوج/ة",
+                Value = "Married"
+            },
+ new SelectListItem{
+                Text="اعزب",
+                Value = "Single"
+            },
+           new SelectListItem{
+                Text="مطلق/ة",
+                Value = "Divorced"
+            },
+            new SelectListItem{
+                Text="ارمل/ة",
+                Value = "Widow"
+            }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].MARITALSTATUS)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => FamilyData[i].RELATIONID, "RELATION")
+                <div>
+                    @Html.DropDownListFor(model => FamilyData[i].RELATIONID, ViewBag.RELATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => FamilyData[i].RELATIONID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Pictures")
+                <div>
+                    <input type="file" name="file1" class="btn btn-info form-control" />
+                    @Html.ValidationMessage("Pictures")
+                </div>
+            </div>
+            @*<div class="col-md-3">
+                @Html.LabelFor(model => model[i].NATIONALITY)
+                <div>
+                    @Html.DropDownListFor(model => model[i].NATIONALITY, new List<SelectListItem>{ new SelectListItem{
+                Text="سوداني",
+                Value = "Citizen"
+            },
+ new SelectListItem{
+                Text="اجنبي",
+                Value = "Foreigner"
+            }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].NATIONALITY)
+                </div>
+            </div>*@
+            @*<div class="col-md-3">
+                @Html.LabelFor(model => model[i].MAININDIVIDUALID, "INDIVIDUAL1")
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model[i].MAININDIVIDUALID, ViewBag.MAININDIVIDUALID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].MAININDIVIDUALID)
+                </div>
+            </div>*@
+        </div>
+        <div class="row my-2">
+            @*<div class="col-md-3">
+                @Html.LabelFor(model => model[i].STARTDATE)
+                <div>
+                    @Html.TextBoxFor(model => model[i].STARTDATE, new { @class = "form-control", @type = "Date" })
+                    @Html.ValidationMessageFor(model => model[i].STARTDATE)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].TERMINATEDATE)
+                <div>
+                    @Html.TextBoxFor(model => model[i].TERMINATEDATE, new { @class = "form-control", @type = "Date" })
+                    @Html.ValidationMessageFor(model => model[i].TERMINATEDATE)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].YEARLYCEILING)
+                <div>
+                    @Html.TextBoxFor(model => model[i].YEARLYCEILING, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].YEARLYCEILING)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].OCCUPATIONID, "OCCUPATION")
+                <div>
+                    @Html.DropDownListFor(model => model[i].OCCUPATIONID, ViewBag.OCCUPATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].OCCUPATIONID)
+                </div>
+            </div>*@
+        </div>
+        <div class="row my-2">
+            @*<div class="col-md-3">
+                @Html.LabelFor(model => model[i].JOBNUMBER)
+                <div>
+                    @Html.TextBoxFor(model => model[i].JOBNUMBER, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].JOBNUMBER)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model[i].JOBTITLEID, "JOBTITLE")
+                <div>
+                    @Html.DropDownListFor(model => model[i].JOBTITLEID, ViewBag.JOBTITLEID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model[i].JOBTITLEID)
+                </div>
+            </div>*@
+            
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+    
+}

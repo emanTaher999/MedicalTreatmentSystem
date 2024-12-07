@@ -1,0 +1,329 @@
+﻿@model MedicalTreatment.Models.VMIndividual
+@using MedicalTreatment.Models;
+
+@{
+    
+    ViewBag.Title = "Edit";
+
+    Entities db = new Entities();
+    
+       }
+
+
+
+<h2>Edit</h2>
+<legend>INDIVIDUAL</legend>
+@using (Html.BeginForm("Edit", "Individual", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row my-2">
+        <div class="col-md-4">
+            <img src="/Individual/RetrieveImage/@Model.Individual[0].ID" class="shadow rounded mt-3" height="200" width="200" />
+            </div>
+        <div class="col-md-4">
+           
+        </div>
+        <div class="col-md-4">
+        </div>
+        </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("الإسم")
+            <div>
+                @Html.HiddenFor(model => model.Individual[0].ID)
+                @Html.HiddenFor(model => model.Individual[0].MAININDIVIDUALID)
+                @Html.HiddenFor(model => model.Individual[0].RELATIONID)
+                @Html.TextBoxFor(model => model.Individual[0].NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].NAME)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الإسم بالإنجليزي")
+            <div>
+                @Html.TextBoxFor(model => model.Individual[0].NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].NAMEEN)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("تاريخ الميلاد")
+            <div>
+                @Html.TextBoxFor(model => model.Individual[0].BIRTHDATE, new { @class = "form-control", @type = "Date" })
+                @Html.ValidationMessageFor(model => model.Individual[0].BIRTHDATE)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الجنس")
+            <div>
+                @Html.DropDownListFor(model => model.Individual[0].GENDER, new SelectList(ViewBag.GENDER, "Value", "Text", Model.Individual[0].GENDER), "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].GENDER)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("المجموعة")
+            <div>
+                @Html.DropDownList("MAINORGANISATIONID", null, "---اختر---", new { @class = "form-control", @id = "MAINORGANISATION", onchange = "MAINORGANISATIONChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.Individual[0].MAINORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الشركة")
+            <div>
+                @Html.DropDownList("ORGANISATION", null, "---اختر---", new { @class = "form-control", @id = "ORGANISATION", onchange = "DEPARTMENTChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.Individual[0].ORGANISATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الإدارة")
+            <div>
+                @Html.DropDownList("DEPARTMENT", null, "---اختر---", new { @class = "form-control", @id = "DEPARTMENT", onchange = "SECTIONChange(this.value);" })
+                @Html.ValidationMessageFor(model => model.Individual[0].DEPARTMENTID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("القسم")
+            <div>
+                @Html.DropDownList("SECTIONID", null, "---اختر---", new { @class = "form-control", @id = "SECTIONID" })
+                @Html.ValidationMessageFor(model => model.Individual[0].SECTIONID)
+            </div>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("الحالة الإجتماعية")
+            <div>
+                @Html.DropDownListFor(model => model.Individual[0].MARITALSTATUS, new SelectList(ViewBag.MARITALSTATUS, "Value", "Text", Model.Individual[0].MARITALSTATUS), "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].MARITALSTATUS)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("العلاقة")
+            <div>
+                @Html.DropDownListFor(model => model.Individual[0].NATIONALITY, new SelectList(ViewBag.NATIONALITY, "Value", "Text", Model.Individual[0].NATIONALITY), "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].NATIONALITY)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("المهنة")
+            <div>
+                @Html.DropDownList("OCCUPATIONID", null, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].OCCUPATIONID)
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الوظيفة")
+            <div>
+                @Html.DropDownList("JOBTITLEID", null, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].JOBTITLEID)
+            </div>
+        </div>
+    </div>
+   
+    <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("رقم الوظيفة")
+            <div>
+                @Html.TextBoxFor(model => model.Individual[0].JOBNUMBER, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Individual[0].JOBNUMBER)
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            @Html.Label("الصورة")
+            <div>
+                <input type="file" name="file" class="btn btn-info form-control" />
+                @Html.ValidationMessage("Pictures")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("هل يكفل احد ؟")
+            <div>
+                @Html.DropDownList("sponsor", new List<SelectListItem>{ new SelectListItem{
+                Text="نعم",
+                Value = "Yes"
+            },
+ new SelectListItem{
+                Text="لا",
+                Value = "No"
+            }}, "---اختر---", new { @class = "form-control", @id = "sponsor", onchange = "Checksponsor(this.value);" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("عدد المكفولين")
+            <div>
+                @Html.TextBox("Number", null, new { @class = "form-control", onchange = "getpartialDiv(this.value);", @id = "Number", @disabled = "disabled", @Value = "0" })
+            </div>
+        </div>
+    </div>
+    for (int i = 0; i < Model.FamilyData.ToArray().Length; i++)
+{
+    <div class="card p-4 shadow mt-3">
+        <legend class="bg-custom shadow  px-3">تفاصيل المكفولين</legend>
+        <div class="row my-2">
+            <div class="col-md-4">
+                <img src="/Individual/RetrieveImage/@Model.FamilyData[i].ID" class="shadow rounded mt-3" height="200" width="200" />
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.Label("الإسم")
+                <div>
+                    @Html.HiddenFor(model => model.FamilyData[i].ID)
+                    @Html.HiddenFor(model => model.FamilyData[i].MAININDIVIDUALID)
+                    @Html.HiddenFor(model => model.FamilyData[i].NATIONALITY)
+                    @Html.TextBoxFor(model => model.FamilyData[i].NAME, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[i].NAME)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("الإسم بالانجليزي")
+                <div>
+                    @Html.TextBoxFor(model => model.FamilyData[i].NAMEEN, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[i].NAMEEN)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("تاريخ الميلاد")
+                <div>
+                    @Html.TextBoxFor(model => model.FamilyData[i].BIRTHDATE, new { @class = "form-control", @type = "Date" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[i].BIRTHDATE)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("الجنس")
+                <div>
+                    @Html.DropDownListFor(model => model.FamilyData[i].GENDER, new SelectList(ViewBag.GENDER, "Value", "Text", Model.FamilyData[i].GENDER), "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[i].GENDER)
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.Label("الحالة الإجتماعية")
+                <div>
+                    @Html.DropDownListFor(model => model.FamilyData[i].MARITALSTATUS, new SelectList(ViewBag.MARITALSTATUS, "Value", "Text", Model.FamilyData[i].MARITALSTATUS), "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[i].MARITALSTATUS)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("العلاقة")
+                <div>
+                    @Html.DropDownListFor(model => model.FamilyData[@i].RELATIONID, new SelectList(db.RELATIONS, "ID", "NAME", Model.FamilyData[@i].RELATIONID), "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FamilyData[@i].RELATIONID)
+                   
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("الصورة")
+                <div>
+                    <input type="file" name="file2" class="btn btn-info form-control" />
+                    @Html.ValidationMessage("Pictures")
+                </div>
+            </div>
+        </div>
+    </div>
+    
+}
+    
+    <div class="row my-2">
+        <div class="col-lg-12" id="partial">
+
+        </div>
+    </div>
+    <div align="center">
+
+        <input type="submit" value="Edit" class="btn btn-primary" />
+
+        <a href="/Individual/Index" class="btn btn-outline-info">Back to List</a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function getpartialDiv(NUMBEROFCHILDREN) {
+            debugger
+            var Number = $('#Number').val();
+            input = { 'Number': Number };
+            $.ajax({
+                url: '@Url.Action("getpartialDiv", "Individual")',
+                type: 'post',
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    document.getElementById("partial").innerHTML = data;
+                },
+                error: function (err) {
+                    console.log("ajax failure (links permisoins): " + err.val());
+                }
+            });
+        }
+        function Checksponsor(id) {
+            debugger
+            if (id == "No") {
+                $("#Number").attr("disabled", "disabled");
+            }
+            else {
+                $("#Number").removeAttr('disabled');
+            }
+        }
+        function MAINORGANISATIONChange(id) {
+            debugger
+            var _city = id.replace('MAINORGANISATION', 'ORGANISATION');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ ORGANISATION: id }, "/Individual/getORGANISATION", "ORGANISATION", " ", true);
+        }
+        function DEPARTMENTChange(id) {
+            debugger
+            var _city = id.replace('ORGANISATION', 'DEPARTMENT');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ DEPARTMENT: id }, "/Individual/getDEPARTMENT", "DEPARTMENT", " ", true);
+        }
+        function SECTIONChange(id) {
+            debugger
+            var _city = id.replace('DEPARTMENT', 'SECTIONID');
+            var _state = $('select[name="' + id + '"]').val();
+            GetDropDown({ SECTIONID: id }, "/Individual/getSECTIONID", "SECTIONID", " ", true);
+        }
+        function GetDropDown(input, url, targetId, defaultValue, withdefaultValue) {
+            var target = $('select[name="' + targetId + '"]');
+            //var target = $('#' + targetId);
+            $.ajax({
+                url: url,
+                type: "POST",
+                traditional: true,
+                data: JSON.stringify(input),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    target.empty();
+                    if (withdefaultValue)
+                        target.append("<option value='" + 0 + "'>" + defaultValue + " </option>");
+                    $(data).each(function () {
+                        $(document.createElement('option'))
+                .attr('value', this.Value)
+                .text(this.Text)
+                .appendTo(target);
+                    });
+
+                    return;
+
+                },
+                error: function () {
+                    return;
+                }
+            });
+        }
+    </script>
+}

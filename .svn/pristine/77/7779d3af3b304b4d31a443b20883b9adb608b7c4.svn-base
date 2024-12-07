@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="COMPANYPOLICY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="ORGANIZATIONID" Type="Int32" Nullable="false" />
+    <Property Name="EFFECTDATE" Type="DateTime" Nullable="false" />
+    <Property Name="EMPLOYEESAMECEILING" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COVERAGEPERCENT" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Self.FKCOMPANYPOLICYORGSTRUCTURE" FromRole="COMPANYPOLICY" ToRole="ORGANIZATIONSTRUCTURE" />
+  </EntityType>
+  <EntityType Name="GENERALCEILING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="YEAR" Type="Int16" Nullable="false" />
+    <Property Name="CEILING" Type="Decimal" Precision="24" Scale="2" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="INDIVIDUAL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="BIRTHDATE" Type="DateTime" Nullable="false" />
+    <Property Name="GENDER" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MAINORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="ORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="DEPARTMENTID" Type="Int32" />
+    <Property Name="SECTIONID" Type="Int32" />
+    <Property Name="MARITALSTATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RELATIONID" Type="Int32" Nullable="false" />
+    <Property Name="NATIONALITY" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MAININDIVIDUALID" Type="Int32" />
+    <Property Name="STARTDATE" Type="DateTime" Precision="6" Nullable="false" />
+    <Property Name="TERMINATEDATE" Type="DateTime" Precision="6" />
+    <Property Name="YEARLYCEILING" Type="Decimal" Precision="24" Scale="2" />
+    <Property Name="OCCUPATIONID" Type="Int32" />
+    <Property Name="JOBNUMBER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="OCCUPATION" Relationship="Self.FKINDIVIDUALOCCUPATION" FromRole="INDIVIDUALS" ToRole="OCCUPATION" />
+    <NavigationProperty Name="INDIVIDUALS1" Relationship="Self.FKINDIVIDUALSMAININDV" FromRole="INDIVIDUALS" ToRole="INDIVIDUALS1" />
+    <NavigationProperty Name="INDIVIDUAL1" Relationship="Self.FKINDIVIDUALSMAININDV" FromRole="INDIVIDUALS1" ToRole="INDIVIDUALS" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Self.FKINDIVIDUALSORGSTRUCDEPT" FromRole="INDIVIDUALS" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE1" Relationship="Self.FKINDIVIDUALSORGSTRUCMAIN" FromRole="INDIVIDUALS" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE2" Relationship="Self.FKINDIVIDUALSORGSTRUCORG" FromRole="INDIVIDUALS" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE3" Relationship="Self.FKINDIVIDUALSORGSTRUCSECT" FromRole="INDIVIDUALS" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="RELATION" Relationship="Self.FKINDIVIDUALSRELATION" FromRole="INDIVIDUALS" ToRole="RELATIONS" />
+    <Property Name="JOBTITLEID" Type="Int32" />
+    <NavigationProperty Name="JOBTITLE" Relationship="Model.FKINDIVIDUALJOBTITLE" FromRole="INDIVIDUAL" ToRole="JOBTITLE" />
+  </EntityType>
+  <EntityType Name="OCCUPATION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Self.FKINDIVIDUALOCCUPATION" FromRole="OCCUPATION" ToRole="INDIVIDUALS" />
+  </EntityType>
+  <EntityType Name="ORGANIZATIONPROFILE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="ORGANIZATIONID" Type="Int32" Nullable="false" />
+    <Property Name="LOGO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FORMLOGO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Self.FKORGANIZATIONPROFILESTRUCTURE" FromRole="ORGANIZATIONPROFILE" ToRole="ORGANIZATIONSTRUCTURE" />
+  </EntityType>
+  <EntityType Name="ORGANIZATIONSTRUCTURE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="PARENTID" Type="Int32" />
+    <Property Name="STRUCTURECODEID" Type="Int16" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="COMPANYPOLICies" Relationship="Self.FKCOMPANYPOLICYORGSTRUCTURE" FromRole="ORGANIZATIONSTRUCTURE" ToRole="COMPANYPOLICY" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Self.FKINDIVIDUALSORGSTRUCDEPT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUALS" />
+    <NavigationProperty Name="INDIVIDUALS1" Relationship="Self.FKINDIVIDUALSORGSTRUCMAIN" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUALS" />
+    <NavigationProperty Name="INDIVIDUALS2" Relationship="Self.FKINDIVIDUALSORGSTRUCORG" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUALS" />
+    <NavigationProperty Name="INDIVIDUALS3" Relationship="Self.FKINDIVIDUALSORGSTRUCSECT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUALS" />
+    <NavigationProperty Name="ORGANIZATIONPROFILEs" Relationship="Self.FKORGANIZATIONPROFILESTRUCTURE" FromRole="ORGANIZATIONSTRUCTURE" ToRole="ORGANIZATIONPROFILE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE1" Relationship="Self.FKORGANIZATIONSTRUCTUREPARENT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="ORGANIZATIONSTRUCTURE1" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE2" Relationship="Self.FKORGANIZATIONSTRUCTUREPARENT" FromRole="ORGANIZATIONSTRUCTURE1" ToRole="ORGANIZATIONSTRUCTURE" />
+  </EntityType>
+  <EntityType Name="RELATION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GENDER" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MAININDIVIDUAL" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MATERNITYAPPLICABLE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Self.FKINDIVIDUALSRELATION" FromRole="RELATIONS" ToRole="INDIVIDUALS" />
+  </EntityType>
+  <EntityType Name="STRUCTURECODE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STRUCTURESEQUENCE" Type="Int16" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <Association Name="FKCOMPANYPOLICYORGSTRUCTURE">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="COMPANYPOLICY" Type="Self.COMPANYPOLICY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="COMPANYPOLICY">
+        <PropertyRef Name="ORGANIZATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALOCCUPATION">
+    <End Role="OCCUPATION" Type="Self.OCCUPATION" Multiplicity="0..1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OCCUPATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="OCCUPATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSMAININDV">
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="0..1" />
+    <End Role="INDIVIDUALS1" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INDIVIDUALS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS1">
+        <PropertyRef Name="MAININDIVIDUALID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCDEPT">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="DEPARTMENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCMAIN">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="MAINORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCORG">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="ORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCSECT">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="SECTIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSRELATION">
+    <End Role="RELATIONS" Type="Self.RELATION" Multiplicity="1" />
+    <End Role="INDIVIDUALS" Type="Self.INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RELATIONS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUALS">
+        <PropertyRef Name="RELATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKORGANIZATIONPROFILESTRUCTURE">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="ORGANIZATIONPROFILE" Type="Self.ORGANIZATIONPROFILE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORGANIZATIONPROFILE">
+        <PropertyRef Name="ORGANIZATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKORGANIZATIONSTRUCTUREPARENT">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Role="ORGANIZATIONSTRUCTURE1" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORGANIZATIONSTRUCTURE1">
+        <PropertyRef Name="PARENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COMPANYPOLICies" EntityType="Self.COMPANYPOLICY" />
+    <EntitySet Name="GENERALCEILINGs" EntityType="Self.GENERALCEILING" />
+    <EntitySet Name="INDIVIDUALS" EntityType="Self.INDIVIDUAL" />
+    <EntitySet Name="OCCUPATIONs" EntityType="Self.OCCUPATION" />
+    <EntitySet Name="ORGANIZATIONPROFILEs" EntityType="Self.ORGANIZATIONPROFILE" />
+    <EntitySet Name="ORGANIZATIONSTRUCTUREs" EntityType="Self.ORGANIZATIONSTRUCTURE" />
+    <EntitySet Name="RELATIONS" EntityType="Self.RELATION" />
+    <EntitySet Name="STRUCTURECODES" EntityType="Self.STRUCTURECODE" />
+    <AssociationSet Name="FKCOMPANYPOLICYORGSTRUCTURE" Association="Self.FKCOMPANYPOLICYORGSTRUCTURE">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="COMPANYPOLICY" EntitySet="COMPANYPOLICies" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALOCCUPATION" Association="Self.FKINDIVIDUALOCCUPATION">
+      <End Role="OCCUPATION" EntitySet="OCCUPATIONs" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSMAININDV" Association="Self.FKINDIVIDUALSMAININDV">
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+      <End Role="INDIVIDUALS1" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCDEPT" Association="Self.FKINDIVIDUALSORGSTRUCDEPT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCMAIN" Association="Self.FKINDIVIDUALSORGSTRUCMAIN">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCORG" Association="Self.FKINDIVIDUALSORGSTRUCORG">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCSECT" Association="Self.FKINDIVIDUALSORGSTRUCSECT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSRELATION" Association="Self.FKINDIVIDUALSRELATION">
+      <End Role="RELATIONS" EntitySet="RELATIONS" />
+      <End Role="INDIVIDUALS" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKORGANIZATIONPROFILESTRUCTURE" Association="Self.FKORGANIZATIONPROFILESTRUCTURE">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="ORGANIZATIONPROFILE" EntitySet="ORGANIZATIONPROFILEs" />
+    </AssociationSet>
+    <AssociationSet Name="FKORGANIZATIONSTRUCTUREPARENT" Association="Self.FKORGANIZATIONSTRUCTUREPARENT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="ORGANIZATIONSTRUCTURE1" EntitySet="ORGANIZATIONSTRUCTUREs" />
+    </AssociationSet>
+    <EntitySet Name="JOBTITLES" EntityType="Model.JOBTITLE" />
+    <AssociationSet Name="FKINDIVIDUALJOBTITLE" Association="Model.FKINDIVIDUALJOBTITLE">
+      <End Role="JOBTITLE" EntitySet="JOBTITLES" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="JOBTITLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Model.FKINDIVIDUALJOBTITLE" FromRole="JOBTITLE" ToRole="INDIVIDUAL" />
+  </EntityType>
+  <Association Name="FKINDIVIDUALJOBTITLE">
+    <End Type="Model.JOBTITLE" Role="JOBTITLE" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JOBTITLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="JOBTITLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,232 @@
+﻿@model IPagedList<MedicalTreatment.Models.MEDICALCLAIMFORM>
+@using PagedList;
+@using PagedList.Mvc;
+@using MedicalTreatment.Models
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Entities db = new Entities();
+}
+
+
+
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+       
+    </script>
+}
+
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">أستمارة طلب منصرفات علاجية</h2>
+
+<p>
+    <a href="/MedicalClaimForm/Create" class="btn btn-facebook">اضافة</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+@using (Html.BeginForm("Index", "MedicalClaimFormDetail", FormMethod.Get))
+{
+    <div style="margin-bottom:20px" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" style="width: 300px; margin-bottom: 10px" />
+        <input type="submit" name="submit" value="بحث " class="btn btn-outline-primary" />
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-border table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayName("أسم الموظف")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم المجموعة")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم الشركة")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم الأدارة")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم القسم")
+                </th>
+                <th>
+                    @Html.DisplayName("المريض الموظف؟")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم المريض")
+                </th>
+                <th>
+                    @Html.DisplayName("أسم الخدمة الطبية")
+                </th>
+                <th>
+                    @Html.DisplayName("بيان الخدمة الطبية")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ بداية الإجازة المرضية")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ انتهاء الإجازة المرضية")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ المطالبة")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ توقيع الوحدة الخدمية للموظف")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ الإدخال")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ الموافقة")
+                </th>
+                <th>
+                    @Html.DisplayName("جملة مبلغ العلاج")
+                </th>
+                <th>
+                    @Html.DisplayName("المبلغ المستحق")
+                </th>
+                <th>
+                    @Html.DisplayName("المبلغ المصدق")
+                </th>
+                <th>
+                    @Html.DisplayName("تعليق مقدم الطلب")
+                </th>
+                <th>
+                    @Html.DisplayName("تعليق الوحدة الخدمية للموظف")
+                </th>
+                <th>
+                    @Html.DisplayName("تعليق الموارد البشرية")
+                </th>
+                <th>
+                    @Html.DisplayName("الحالة")
+                </th>
+                <th>
+                    @Html.DisplayName("آخر تحديث")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.INDIVIDUAL.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE3.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE1.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE2.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PATIENTEMPLOYEE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PATIENTID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MEDICALSERVICE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MEDICALDETAILSERVICE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SICKLEAVESTARTDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SICKLEAVEENDDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CLAIMDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEESERVICEUNITDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ENTERDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.APPROVEDDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TOTALCLAIMAMOUNT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ENTITLEMENTAMOUNT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.APPROVEDAMOUNT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CLAIMNOTE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEESERVICEUNITNOTE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HUMANRESOURCESNOTE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LASTUPDATED)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "MedicalClaimFormDetail", new { x, search = Request.QueryString["search"] }))
+    </div>
+    </div>
+<link href="~/Scripts/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $("#sortedtable").DataTable();
+</script>

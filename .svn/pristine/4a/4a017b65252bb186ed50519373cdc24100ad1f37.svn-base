@@ -1,0 +1,57 @@
+﻿@model MedicalTreatment.Models.SUPPLIERTYPE
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">انواع مقدمى الخدمة</h2>
+@Html.HiddenFor(model => model.ID)
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.NAME)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.NAMEEN)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    </div>
+                </div>
+
+
+            </div>
+
+            
+        </div>
+
+    </div>
+
+    <div align="center" class="mt-2">
+
+        <input type="submit" value="تعديل" class="btn btn-success" />
+        <a href="/SupplierTypes/Index" class="btn btn-outline-info">رجوع</a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+
+}
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "تقرير";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>الصرف حسب الادارة في كل شركة</h4>
+</div>
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تقرير</legend>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            @Html.Label("التاريخ من")
+            <div>
+                @Html.TextBox("InFromDate", "", new { @class = "form-control", @type = "Date", @id = "InFromDate" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("التاريخ الى")
+            <div>
+                @Html.TextBox("InToDate", "", new { @class = "form-control", @type = "Date", @id = "InToDate" })
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <br />
+    @*<div align="center">
+            <input type="submit" value="عرض التقرير" class="btn btn-success" onclick="GenerateReport();" />
+        </div>*@
+    <p class="mt-3">
+        <input type="button" value="طباعة" onclick=" GenerateReport(); " class="btn btn-warning hvr-bounce-out" />
+
+        <a href="/SpCompanyDepartmentExpenses/Index" class="btn btn-outline-info">عودة للقائمة</a>
+
+    </p>
+</fieldset>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @*<link href="docsupport/style.css" rel="stylesheet" />
+            <script src="~/Content/Chosen/chosen.jquery.js"></script>
+            <link href="chosen.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>*@
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#REPRESENTATIVEID").select;
+            });
+
+            function GenerateReport() {
+                debugger
+                var InFromDate = $('#InFromDate').val();
+                var InToDate = $('#InToDate').val();
+                var link = "/SpCompanyDepartmentExpenses/CompanyDepartmentExpenses/?InToDate=" + InToDate + "&InFromDate=" + InFromDate;
+                window.open(link, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+            }
+
+
+        </script>
+    }

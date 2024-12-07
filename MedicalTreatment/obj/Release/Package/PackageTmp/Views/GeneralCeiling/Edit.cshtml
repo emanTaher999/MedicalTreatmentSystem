@@ -1,0 +1,66 @@
+﻿@model MedicalTreatment.Models.GENERALCEILING
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i> السقف العـــــــام</h4>
+</div>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تعديل</legend>
+
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.STATUS)
+    <div class="row">
+        <div class="col-md-6">
+            <div class="editor-label">
+                السنة العلاجية
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.YEAR, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.YEAR)
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="editor-label">
+                السقف العلاجي
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.CEILING, "{0:#,###,###.##}", new { @class = "form-control", @onchange = "digitGrouping(this.id);" })
+                @Html.ValidationMessageFor(model => model.CEILING)
+            </div>
+        </div>
+    </div>
+
+
+    <p class="mt-3 col-md-12 ">
+        <input type="submit" class="btn btn-success" value="تعديل" />
+        <a href="/GeneralCeiling/Index" class="btn btn-outline-info">عودة للقائمة</a>
+       
+    </p>
+</fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    function digitGrouping(id) {
+        var vlue = $('#' + id).val();
+        var auth = vlue.toString("{0:##,##.##}");
+        var offset = vlue.length % 3;
+        if (offset == 0)
+            auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        else
+            auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/(\d{3})/g, '$1 ');
+        //auth = auth.replace(/,/g, "");
+        $('#' + id).val(auth);
+    }
+</script>

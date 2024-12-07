@@ -1,0 +1,64 @@
+﻿@model MedicalTreatment.Models.SUPPLIER
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>مقدمى الخدمة</h4>
+</div>
+
+
+<fieldset class="card shadow mx-auto  w-75 p-4" dir="rtl">
+    <h5 style="color : orangered;">هل انت متأكد لحذف البيانات?</h5>
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+    <div class="row">
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> نوع مقدم الخدمة    </b>
+            <div class="">
+                @Html.DisplayFor(model => model.SUPPLIERTYPEID)
+            </div>
+        </div>
+
+        <div class="alert col-md-5 mx-4 alert-info">
+            <b>  الاسم بالعربي    </b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAME)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> الاسم بالانجليزي</b>
+            <div class="">
+                @Html.DisplayFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b>  الحالة</b>
+            <div class="">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>
+        </div>
+
+
+        <div class="alert col-md-5 mx-4 alert-info ">
+            <b> آخر تحديث</b>
+            <div>
+                @Html.DisplayFor(model => model.LASTUPDATED)
+
+            </div>
+        </div>
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p class="mt-3  d-flex justify-content-end mx-auto w-75">
+        <a href="/Suppliers/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+
+        <input type="submit" class="btn btn-danger" value="حذف" />
+    </p>
+}

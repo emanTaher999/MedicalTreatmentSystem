@@ -1,0 +1,141 @@
+﻿@model IPagedList<MedicalTreatment.Models.COMPANYPOLICY>
+
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center"> لائحة الشركة</h2>
+
+<p>
+    <a href="/CompanyPolicy/Create" class="btn btn-facebook">اضافة</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+@using (Html.BeginForm("Index", "COMPANYPOLICY", FormMethod.Get))
+{
+    <div style="margin-bottom:20px" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" style="width: 300px; margin-bottom: 10px" />
+        <input type="submit" name="submit" value="بحث " class="btn btn-outline-primary" />
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-border table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayName("هيكل المنظمة")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ البدأ")
+                </th>
+                <th>
+                    @Html.DisplayName("سقف الموظفين")
+                </th>
+                <th>
+                    @Html.DisplayName("نسبة التغطية")
+                </th>
+                <th>
+                    @Html.DisplayName("الحالة")
+                </th>
+                <th>
+                    @Html.DisplayName("أخر تحديث")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EFFECTDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMPLOYEESAMECEILING)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COVERAGEPERCENT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LASTUPDATED)
+                    </td>
+                    <td>
+
+
+                        <a href="/CompanyPolicy/Edit/@item.ID" class="btn btn-outline-success"><i class="fa fa-pencil-alt"></i>   </a> |
+                        <a href="/CompanyPolicy/Details/@item.ID" class="btn btn-outline-info"><i class="fa fa-list"></i>   </a>|
+                        <a href="/CompanyPolicy/Delete/@item.ID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>   </a>
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "COMPANYPOLICY", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>
+
+<link href="~/Scripts/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $("#sortedtable").DataTable();
+</script>

@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "تقرير";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>كشف المنصرفات  الطيبة لموطف</h4>
+</div>
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تقرير</legend>
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="editor-label">
+                اسم الموظف
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("INDIVIDUALS", ViewBag.INDIVIDUALS as SelectList, "---اختر---", new { @class = "form-control", @id = "INDIVIDUALS" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                من تاريخ
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("InFromDate","", new { @class = "form-control", @id = "InFromDate", @type = "Date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                الى تاريخ
+            </div>
+            <div class="editor-field">
+                @Html.TextBox("InToDate", "", new { @class = "form-control", @id = "InToDate", @type = "Date" })
+            </div>
+        </div>
+    </div>
+
+    <p class="mt-3">
+        <input type="button" value="طباعة" onclick=" GenerateReport(); " class="btn btn-warning hvr-bounce-out" />
+
+        <a href="/rptEmployeeMedicalExpenses/Index" class="btn btn-outline-info">عودة للقائمة</a>
+
+    </p>
+</fieldset>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#rdnExport > .pdsa-radiobutton").on('click', function () {
+                pdsaToggleRadioButtons("#rdnExport", $(this));
+            });
+        });
+
+      
+        function GenerateReport() {
+            debugger
+            var InFromDate = $('#InFromDate').val();
+            var InToDate = $('#InToDate').val();
+            var INDIVIDUALS = $('#INDIVIDUALS').val();
+            var link = "/rptEmployeeMedicalExpenses/GetReport/?InToDate=" + InToDate + "&InFromDate=" + InFromDate + "&InIndividual=" + INDIVIDUALS;
+            window.open(link, 'mywindow', 'fullscreen=yes, scrollbars=auto');
+           
+        }
+
+
+
+
+    </script>
+}

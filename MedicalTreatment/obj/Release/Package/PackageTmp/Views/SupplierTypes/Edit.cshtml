@@ -1,0 +1,59 @@
+﻿@model MedicalTreatment.Models.SUPPLIERTYPE
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>  انواع مقدمى الخدمة</h4>
+</div>
+<br />
+
+@Html.HiddenFor(model => model.ID)
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">تعديل</legend>
+    <div class="row my-2">
+        <div class="col-md-6">
+            @Html.Label("الاسم")
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label("الاسم بالانجليزية")
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <p class="mt-3">
+        <input type="submit" class="btn btn-success" value="تعديل" />
+
+        <a href="/SupplierTypes/Index" class="btn btn-outline-info">عودة للقائمة</a>
+    </p>
+
+    
+
+</fieldset>
+
+}
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

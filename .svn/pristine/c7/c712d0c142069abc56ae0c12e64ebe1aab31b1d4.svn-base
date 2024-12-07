@@ -1,0 +1,150 @@
+﻿@model IPagedList<MedicalTreatment.Models.RELATION>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@*<div class="title-header">
+    <h4 class="d-flex justify-content-center "> علاقات الكافل </h4>
+</div>
+<hr />*@
+    <div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-users"></i>علاقات الكافل</h2>
+</div>
+<hr />
+<div class="d-flex mt-5">
+
+    <div class="form-inline ml-auto" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" />
+        <input type="submit" name="submit" value="بحث" class="btn btn-outline-primary mx-3" />
+    </div>
+    <a href="/Relations/Create" class="btn btn-facebook ">اضافة</a>
+</div>
+
+
+
+
+
+
+<div class="table-responsive border mt-3">
+
+
+
+    <table class="table table-border  table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayName("الاسم")
+                </th>
+                <th>
+                    @Html.DisplayName(" الاسم بالانجليزية")
+                </th>
+                <th>
+                    @Html.DisplayName("النوع")
+                </th>
+                <th>
+                    @Html.DisplayName("الكافل")
+                </th>
+                <th>
+                    @Html.DisplayName("الحمل والولادة")
+                </th>
+              
+               
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMEEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GENDER)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MAININDIVIDUAL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MATERNITYAPPLICABLE)
+                    </td>
+                    
+                    
+
+                    <td>
+                        <a href="/Relations/Edit/@item.ID" class="btn btn-outline-success"><i class="fa fa-pencil-alt"></i>   </a>
+                        |
+                        <a href="/Relations/Details/@item.ID" class="btn btn-outline-info"><i class="fa fa-list"></i>   </a>
+                        |
+                        <a href="/Relations/Delete/@item.ID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>   </a>
+                    </td>
+
+
+
+                </tr>
+            }
+        </thead>
+    </table>
+
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "Relations", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>
+
+<link href="~/Scripts/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $("#sortedtable").DataTable();
+</script>

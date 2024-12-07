@@ -1,0 +1,42 @@
+﻿@model MedicalTreatment.Models.ORGANIZATIONPROFILE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>ملف المؤسسه الاساسي</h2>
+
+<h5>هل انت متأكد لحذف البيانات?</</h5>
+<fieldset class="card shadow  w-50 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/OrganizationProfile/RetrieveImage/@Model.ID" class="img-thumbnail rounded" height="100" width="300" />
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.ADDRESS)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.ADDRESS)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.STATUS)
+        </div>      
+        </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+<p>
+    <a href="/OrganizationProfile/Index"class="btn btn-outline-info mx-2">عودة للقائمة</a>   
+    <input type="submit" class="btn btn-danger" value="حذف" />
+</p>
+}

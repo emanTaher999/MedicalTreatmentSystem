@@ -1,0 +1,84 @@
+﻿@model MedicalTreatment.Models.SUPPLIERTYPE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>  نوع مقدم الخدمة</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset class="card p-4 shadow">
+        <legend class="bg-custom shadow  px-3">حذف</legend>
+
+
+
+        <div class="row my-2">
+            <div class="col-md-6">
+
+                
+                    <b>  @Html.Label("الاسم")   </b>
+                    <div class="">
+                        @Html.TextBoxFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                
+                    <b> @Html.Label("الاسم بالانجليزية")   </b>
+                    <div class="">
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                @Html.Label("الحالة")
+                <div class="">
+                    @Html.TextBoxFor(model => model.STATUS, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.STATUS)
+
+                </div>
+            </div>
+            <div class="col-md-6">
+              
+                      @Html.Label("اخر تحديث") 
+                    <div class="">
+                        @Html.TextBoxFor(model => model.LASTUPDATED, new { @class = "form-control", @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.LASTUPDATED)
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <p class="mt-3">
+            <input type="submit" class="btn btn-success" value="حذف" />
+
+            <a href="/SupplierTypes/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        </p>
+
+
+        }
+
+
+
+    </fieldset>}
+<script src="~/Scripts/chosen_v1.6.2/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen_v1.6.2/prism.js"></script>
+<link href="~/Scripts/chosen_v1.6.2/chosen.min.css" rel="stylesheet" />
+<link href="~/Scripts/chosen_v1.6.2/prism.css" rel="stylesheet" />
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

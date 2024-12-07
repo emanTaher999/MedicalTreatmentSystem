@@ -1,0 +1,152 @@
+﻿@using Kafala_System.Models;
+@model List <Kafala_System.Models.CHILDDATA>
+ 
+  @{
+      var childdata = Model.ToArray();
+      var number = ViewBag.childnumber;
+      var childnumber = number;
+      if (childnumber == null)
+      {
+          childnumber = 0;
+      }
+  }
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/Content/css/datepicker.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/Content/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Content/Content/css/Custom.css" rel="stylesheet" />
+</head>
+@for (int i = 0; i < Model.ToArray().Length; i++)
+{
+    <div class="card card-body"style="margin-top:5px;margin-bottom:5px">
+        <div class="row my-2">
+            <div class="col-md-4">
+                @Html.Label("الاسم")
+                <div>
+                    @Html.TextBoxFor(model => childdata[i].NAME, new { @class = "form-control datepicker" })
+                    @Html.ValidationMessage("NAME")
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("الجنس")
+                <div>
+                    @Html.DropDownListFor(model => childdata[i].GENDER, new List<SelectListItem>{ new SelectListItem{  
+                Text="ذكر",  
+                Value = "Male"  
+            },  
+ new SelectListItem{  
+                Text="انثى",  
+                Value = "Female"  
+            }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("GENDER")
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.Label("تاريخ الميلاد")
+                <div>
+                    @Html.TextBoxFor(model => childdata[i].DATEOFBIRTH,"dd-mm-yy", new { @class = "form-control datepicker", @type = "Date" })
+                    @Html.ValidationMessage("DATEOFBIRTH")
+                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-md-3">
+                @Html.Label("المستوى التعليمي")
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => childdata[i].EDUCATIONLEVELID, ViewBag.EDUCATIONLEVELID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("EDUCATIONLEVELID")
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("الحالة الصحية")
+                <div>
+                    @Html.DropDownListFor(model => childdata[i].HEALTHSTATUSID, ViewBag.HEALTHSTATUSID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("HEALTHSTATUSID")
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("هل يعمل")
+                <div>
+                    @Html.DropDownListFor(model => childdata[i].ISWORK, new List<SelectListItem>{ new SelectListItem{  
+                Text="نعم",  
+                Value = "Yes"  
+            },  
+ new SelectListItem{  
+                Text="لا",  
+                Value = "No"  
+            }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("ISWORK")
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.Label("نوع المهنة")
+                <div>
+                    @Html.DropDownListFor(model => childdata[i].OCCUPATIONID, ViewBag.OCCUPATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("OCCUPATIONID")
+                </div>
+            </div>
+        </div>
+        @*<a href="#" class="list-remove btn btn-small" id="remove"><i class="icon-minus"></i> حذف</a>*@
+    </div>
+}
+  
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="~/Content/Content/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/Content/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="~/Content/Content/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="~/Content/Content/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/Content/Content/js/demo/chart-area-demo.js"></script>
+<script src="~/Content/Content/js/demo/chart-pie-demo.js"></script>
+    <script>
+    $(document).ready(function () {
+        $(".datepicker").each(function () {
+            $(this).datepicker();
+        });
+    });
+    $(".Date").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy'
+    });
+    </script>
+}
+ 
+  
+
+
+
+
+
+
+
+

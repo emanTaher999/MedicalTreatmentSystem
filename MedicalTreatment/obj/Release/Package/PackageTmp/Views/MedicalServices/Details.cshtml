@@ -1,0 +1,95 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>الخدمات الطبية </h2>
+</div>
+
+<fieldset class="card shadow mx-auto w-75 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("الأسم")
+                <div class="">
+                    @Html.DisplayFor(model => model.NAME)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("اللأسم بالأنجليزي")
+                <div class="">
+                    @Html.DisplayFor(model => model.NAMEEN)
+                </div>
+            </div>
+            </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("تشمل الخدمة")
+                <div class="">
+                    @Html.DisplayFor(model => model.SERVICEINCLUDE)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("تنطبق على")
+                <div class="">
+                    @Html.DisplayFor(model => model.APPLICABLEFOR)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("نوع السقف")
+                <div class="">
+                    @Html.DisplayFor(model => model.CEILINGTYPE)
+                </div>
+            </div>
+            </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                @Html.Label("خدمة محدودة")
+                <div class="">
+                    @Html.DisplayFor(model => model.LIMITSERVICE)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                <b>  STATUS   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.STATUS)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-4">
+            <div class="alert alert-info ">
+                <b>  LASTUPDATED   </b>
+                <div class="">
+                    @Html.DisplayFor(model => model.LASTUPDATED)
+                </div>
+            </div>
+            </div>
+        </div>
+</fieldset>
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <div align="center">
+            <a href="/MedicalServices/Index" class="btn btn-outline-info">رجوع</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
+

@@ -1,0 +1,78 @@
+﻿@model MedicalTreatment.Models.MEDICALCLAIMFORMDETAIL
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MEDICALCLAIMFORMDETAIL</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MEDICALCLAIMFORM.PATIENTEMPLOYEE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MEDICALCLAIMFORM.PATIENTEMPLOYEE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SERVICEFEESTYPE.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SERVICEFEESTYPE.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UNIT.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UNIT.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NUMBEROFUNITS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NUMBEROFUNITS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TOTALAMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TOTALAMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ENTITLEMENTPERCENT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ENTITLEMENTPERCENT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ENTITLEMENTAMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ENTITLEMENTAMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LASTUPDATED)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LASTUPDATED)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

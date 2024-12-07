@@ -1,0 +1,214 @@
+﻿@model MedicalTreatment.Models.MEDICALCLAIMFORM
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>MEDICALCLAIMFORM</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.INDIVIDUALID, "INDIVIDUAL")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("INDIVIDUALID", String.Empty)
+            @Html.ValidationMessageFor(model => model.INDIVIDUALID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MAINORGANISATIONID, "ORGANIZATIONSTRUCTURE3")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MAINORGANISATIONID", String.Empty)
+            @Html.ValidationMessageFor(model => model.MAINORGANISATIONID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ORGANISATIONID, "ORGANIZATIONSTRUCTURE1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ORGANISATIONID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ORGANISATIONID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DEPARTMENTID, "ORGANIZATIONSTRUCTURE")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DEPARTMENTID", String.Empty)
+            @Html.ValidationMessageFor(model => model.DEPARTMENTID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SECTIONID, "ORGANIZATIONSTRUCTURE2")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SECTIONID", String.Empty)
+            @Html.ValidationMessageFor(model => model.SECTIONID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PATIENTEMPLOYEE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PATIENTEMPLOYEE)
+            @Html.ValidationMessageFor(model => model.PATIENTEMPLOYEE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PATIENTID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PATIENTID)
+            @Html.ValidationMessageFor(model => model.PATIENTID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MEDICALSERVICEID, "MEDICALSERVICE")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MEDICALSERVICEID", String.Empty)
+            @Html.ValidationMessageFor(model => model.MEDICALSERVICEID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MEDICALDETAILSERVICEID, "MEDICALDETAILSERVICE")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("MEDICALDETAILSERVICEID", String.Empty)
+            @Html.ValidationMessageFor(model => model.MEDICALDETAILSERVICEID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SICKLEAVESTARTDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SICKLEAVESTARTDATE)
+            @Html.ValidationMessageFor(model => model.SICKLEAVESTARTDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SICKLEAVEENDDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SICKLEAVEENDDATE)
+            @Html.ValidationMessageFor(model => model.SICKLEAVEENDDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CLAIMDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CLAIMDATE)
+            @Html.ValidationMessageFor(model => model.CLAIMDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EMPLOYEESERVICEUNITDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EMPLOYEESERVICEUNITDATE)
+            @Html.ValidationMessageFor(model => model.EMPLOYEESERVICEUNITDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ENTERDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ENTERDATE)
+            @Html.ValidationMessageFor(model => model.ENTERDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.APPROVEDDATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.APPROVEDDATE)
+            @Html.ValidationMessageFor(model => model.APPROVEDDATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TOTALCLAIMAMOUNT)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TOTALCLAIMAMOUNT)
+            @Html.ValidationMessageFor(model => model.TOTALCLAIMAMOUNT)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ENTITLEMENTAMOUNT)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ENTITLEMENTAMOUNT)
+            @Html.ValidationMessageFor(model => model.ENTITLEMENTAMOUNT)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.APPROVEDAMOUNT)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.APPROVEDAMOUNT)
+            @Html.ValidationMessageFor(model => model.APPROVEDAMOUNT)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CLAIMNOTE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CLAIMNOTE)
+            @Html.ValidationMessageFor(model => model.CLAIMNOTE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EMPLOYEESERVICEUNITNOTE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EMPLOYEESERVICEUNITNOTE)
+            @Html.ValidationMessageFor(model => model.EMPLOYEESERVICEUNITNOTE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HUMANRESOURCESNOTE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HUMANRESOURCESNOTE)
+            @Html.ValidationMessageFor(model => model.HUMANRESOURCESNOTE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STATUS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STATUS)
+            @Html.ValidationMessageFor(model => model.STATUS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LASTUPDATED)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LASTUPDATED)
+            @Html.ValidationMessageFor(model => model.LASTUPDATED)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

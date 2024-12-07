@@ -1,0 +1,72 @@
+﻿@model Kafala_System.Models.CHILDDATA
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    var childdata = new List<Kafala_System.Models.CHILDDATA>();
+    childdata.Add(new Kafala_System.Models.CHILDDATA());
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+ <div class="row my-2">
+        <div class="col-md-4">
+            @Html.Label("الاسم")
+            <div>
+                @Html.TextBoxFor(model => childdata[i].NAME, new { @class = "form-control" })
+                @Html.ValidationMessage("NAME")
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.Label("الجنس")
+            <div>
+                @Html.TextBoxFor(model => childdata[i].GENDER, new { @class = "form-control" })
+                @Html.ValidationMessage("GENDER")
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.Label("تاريخ الميلاد")
+            <div class="editor-field">
+                @Html.TextBoxFor(model => childdata[i].DATEOFBIRTH, new { @class = "form-control datepicker" })
+                @Html.ValidationMessage("DATEOFBIRTH")
+            </div>
+        </div>
+    </div>
+           <div class="row my-2">
+        <div class="col-md-3">
+            @Html.Label("المستوى التعليمي")
+            <div class="editor-field">
+                @Html.DropDownListFor(model => childdata[i].EDUCATIONLEVELID, ViewBag.EDUCATIONLEVELID as SelectList, String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessage("EDUCATIONLEVELID")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("الحالة الصحية")
+            <div>
+                @Html.DropDownListFor(model => childdata[i].HEALTHSTATUSID, ViewBag.HEALTHSTATUSID as SelectList, String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessage("HEALTHSTATUSID")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("هل يعمل")
+            <div>
+                @Html.TextBoxFor(model => childdata[i].ISWORK, new { @class = "form-control" })
+                @Html.ValidationMessage("ISWORK")
+            </div>
+        </div>
+        <div class="col-md-3">
+            @Html.Label("نوع المهنة")
+            <div>
+                @Html.DropDownListFor(model => childdata[i].OCCUPATIONID, ViewBag.OCCUPATIONID as SelectList, String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessage("OCCUPATIONID")
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

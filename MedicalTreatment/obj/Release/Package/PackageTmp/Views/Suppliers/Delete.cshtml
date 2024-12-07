@@ -1,0 +1,72 @@
+﻿@model MedicalTreatment.Models.SUPPLIER
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i> مقدمى الخدمة </h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset class="card shadow mx-auto  w-75 p-4" dir="rtl">
+
+    <legend class="bg-custom shadow  px-3">حذف</legend>
+    <div class="row">
+        <div class=" col-md-4   ">
+            
+            @Html.Label("نوع مقدم الخدمة ")
+            <div class="">
+                @Html.TextBoxFor(model => model.SUPPLIERTYPEID, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+
+        <div class=" col-md-4 ">
+            
+            @Html.Label(" الاسم بالعربي  ")
+            <div class="">
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+
+
+        <div class=" col-md-4   ">
+            
+            @Html.Label("  الاسم بالانجليزي  ")
+            <div class="">
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+
+
+        <div class=" col-md-4  ">
+            
+            @Html.Label("الحالة")
+            <div class="">
+                @Html.TextBoxFor(model => model.STATUS, new { @class = "form-control", @disabled = "disabled" })
+            </div>
+        </div>
+
+
+        <div class=" col-md-4 ">
+           
+            @Html.Label("آخر تحديث")
+            <div>
+                @Html.TextBoxFor(model => model.LASTUPDATED, new { @class = "form-control", @disabled = "disabled" })
+
+            </div>
+        </div>
+    </div>
+    <p class="mt-3  ">
+        <input type="submit" class="btn btn-danger" value="حذف" />
+        <a href="/Suppliers/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+
+
+    </p>
+</fieldset>
+   
+   
+    }

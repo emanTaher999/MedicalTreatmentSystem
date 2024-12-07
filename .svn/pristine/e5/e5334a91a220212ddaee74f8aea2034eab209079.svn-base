@@ -1,0 +1,63 @@
+﻿@model MedicalTreatment.Models.ORGANIZATIONPROFILE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>ملف المؤسسه الاساسي</h2>
+
+@using (Html.BeginForm("Create", "OrganizationProfile", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend class="bg-custom shadow  px-3">إضافة</legend>
+    <div class="row">
+        <div class="col-md-4">
+
+            @Html.LabelFor(model => model.ORGANIZATIONID, "ORGANIZATIONSTRUCTURE")
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ORGANIZATIONID, ViewBag.ORGANIZATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ORGANIZATIONID)
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.ADDRESS)
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ADDRESS, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ADDRESS)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("Logo")
+            <div>
+                <input type="file" name="file" class="btn btn-info form-control" />
+                @Html.ValidationMessage("Logo")
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.Label("FromLogo")
+            <div>
+                <input type="file" name="file1" class="btn btn-info form-control" />
+                @Html.ValidationMessage("FromLogo")
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <a href="/OrganizationProfile/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        <input type="submit" class="btn btn-primary" value="حفظ" />
+    </p>
+</fieldset>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

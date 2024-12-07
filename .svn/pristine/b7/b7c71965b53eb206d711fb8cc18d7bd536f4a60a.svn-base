@@ -1,0 +1,68 @@
+﻿@model MedicalTreatment.Models.ORGANIZATIONPROFILE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i> ملف المؤسسه الاساسي</h4>
+</div>
+<br />
+@*<h2>ملف المؤسسه الاساسي</h2>*@
+
+@using (Html.BeginForm("Create", "OrganizationProfile", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset>
+
+    <legend class="bg-custom shadow  px-3">إضافة</legend>
+    <br />
+    <div class="row my-2">
+        <div class="col-md-3">
+
+            @Html.Label("إسم المؤسسة")
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.ORGANIZATIONID, ViewBag.ORGANIZATIONID as SelectList, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ORGANIZATIONID)
+            </div>
+    </div>
+
+        <div class="col-md-3">
+            @Html.Label("العنوان")
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.ADDRESS, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ADDRESS)
+            </div>
+        </div>
+  
+            <div class="col-md-3">
+                @Html.Label("شعار الشركة")
+                <div>
+                    <input type="file" name="file" class="btn btn-info form-control" />
+                    @Html.ValidationMessage("Logo")
+                </div>
+            </div>
+        <div class="col-md-3">
+            @Html.Label("شعار المؤسسة")
+            <div>
+                <input type="file" name="file1" class="btn btn-info form-control" />
+                @Html.ValidationMessage("FromLogo")
+            </div>
+        </div>
+    </div>
+    <br />
+    <p>
+        <a href="/OrganizationProfile/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        <input type="submit" class="btn btn-primary" value="حفظ" />
+    </p>
+</fieldset>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

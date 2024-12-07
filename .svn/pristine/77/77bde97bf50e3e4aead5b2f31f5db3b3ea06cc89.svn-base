@@ -1,0 +1,50 @@
+﻿@model MedicalTreatment.Models.GENERALCEILING
+
+@{
+    ViewBag.Title = "Create";
+}
+<h2> السقف العام </h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">إضافة</legend>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="editor-label">
+                السنه
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.YEAR)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.YEAR, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.YEAR)
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="editor-label">
+                السقف
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CEILING)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CEILING, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CEILING)
+            </div>
+        </div>
+    </div>
+    <p class="mt-3">
+        <a href="/GeneralCeiling/Index" class="btn btn-outline-info">عودة للقائمة</a>
+        <input type="submit" class="btn btn-primary" value="حفظ" />
+    </p>
+</fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

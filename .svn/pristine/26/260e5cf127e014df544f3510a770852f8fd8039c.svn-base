@@ -1,0 +1,55 @@
+﻿@model MedicalTreatment.Models.SUPPLIERTYPE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center"> انواع مقدمى الخدمة</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+                <div class="col-md-6">
+                    @Html.Label("الاسم ")
+                    <div>
+                        @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.Label("الاسم بالانجليزية")
+                    <div>
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <div align="center" class="mt-2">
+
+
+        <input type="submit" value="اضافة" class="btn btn-primary" />
+
+
+        <a href="/SupplierTypes/Index" class="btn btn-outline-info">رجوع للقائمة</a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

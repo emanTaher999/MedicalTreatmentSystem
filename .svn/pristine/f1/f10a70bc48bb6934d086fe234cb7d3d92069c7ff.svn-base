@@ -1,0 +1,150 @@
+﻿@model IPagedList<MedicalTreatment.Models.INDIVIDUAL>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+    </script>
+}
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "Individual", FormMethod.Get))
+{
+    <div class="d-flex mt-5">
+        <div class="form-inline ml-auto" align="center">
+            <input type="text" name="search" placeholder="بــــحــــث" class="form-control" />
+            <input type="submit" name="submit" value="بحث " class="btn btn-outline-primary mx-3" />
+        </div>
+        <a href="/Individual/Create" class="btn btn-facebook">اضافة</a>
+    </div>
+    
+}
+<div class="table-responsive mt-3">
+    <table class="table table-border table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NAMEEN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().BIRTHDATE)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().GENDER)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ORGANIZATIONSTRUCTURE1.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ORGANIZATIONSTRUCTURE2.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ORGANIZATIONSTRUCTURE.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ORGANIZATIONSTRUCTURE3.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().MARITALSTATUS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().RELATION.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NATIONALITY)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().INDIVIDUAL1.NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().STARTDATE)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMEEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BIRTHDATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GENDER)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE1.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE2.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGANIZATIONSTRUCTURE3.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MARITALSTATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RELATION.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NATIONALITY)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.INDIVIDUAL1.NAME)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" href="/Individual/Edit/@item.ID"><i class="fa fa-pencil-alt"></i></a>  |
+                        <a class="btn btn-outline-info" href="/Individual/Details/@item.ID"><i class="fa fa-list"></i> </a> |
+                        <a class="btn btn-outline-danger" href="/Individual/Delete/@item.ID"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </thead>
+    </table>
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "Individual", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>

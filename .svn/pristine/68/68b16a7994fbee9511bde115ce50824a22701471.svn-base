@@ -1,0 +1,151 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-users"></i>الخدمات الطبية </h2>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+      <fieldset class="card p-4 shadow">
+        <legend class="bg-custom shadow  px-3">إضافة</legend>
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+              
+                <div class="col-md-4">
+ @Html.Label("الأسم")                    <div>
+                        @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+<<<<<<< .mine                    @Html.Label("اللأسم بالأنجليزي")
+=======                    @Html.Label("الإسم بالإنجليزي")
+>>>>>>> .theirs                    <div>
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.Label("تشمل الخدمة")
+                    <div>
+                     
+
+
+                        @Html.DropDownListFor(model => model.SERVICEINCLUDE, new List<SelectListItem>{ new SelectListItem{
+                      Text="الموظف فقط",
+                      Value = "EmployeeOnly"
+                  },
+       new SelectListItem{
+<<<<<<< .mine                      Text="الموظف والعائلة",
+=======                      Text="الموظف و اسرنه",
+>>>>>>> .theirs                      Value = "EmployeeAndFamily"
+                  }}, "---اختر---", new { @class = "form-control" })
+                        @Html.ValidationMessage("SERVICEINCLUDE")
+
+                    </div>
+                </div>
+            </div>
+
+                <div class="row my-2">
+
+                    <div class="col-md-4">
+<<<<<<< .mine                        @Html.Label("تنطبق على")
+=======                        @Html.Label("APPLICABLEFOR")
+>>>>>>> .theirs                        <div>
+                           
+
+
+                            @Html.DropDownListFor(model => model.APPLICABLEFOR, new List<SelectListItem>{ new SelectListItem{
+                 Text="ذكر",
+                 Value = "Male"
+             },
+  new SelectListItem{
+                 Text="أنثي",
+                 Value = "Female"
+             }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("APPLICABLEFOR")
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        @Html.Label("نوع السقف")
+                        <div>
+                          
+
+
+                            @Html.DropDownListFor(model => model.CEILINGTYPE, new List<SelectListItem>{ new SelectListItem{
+        Text="التفاصيل",
+        Value = "DetailService"
+    },
+new SelectListItem{
+        Text="سقف كامل",
+        Value = "WholeCeiling"
+},
+new SelectListItem{
+        Text="خدمة",
+        Value = "Service"
+    }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("CEILINGTYPE")
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+<<<<<<< .mine                        @Html.Label("خدمة محدودة")
+=======                        @Html.Label("حدود الخدمة")
+>>>>>>> .theirs                        <div>
+                          
+
+                            @Html.DropDownListFor(model => model.LIMITSERVICE, new List<SelectListItem>{ new SelectListItem{
+        Text="نعم",
+        Value = "Yes"
+    },
+new SelectListItem{
+        Text="لا",
+        Value = "No"
+    }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("LIMITSERVICE")
+
+                        </div>
+                    </div>
+
+
+                  
+                </div>
+<<<<<<< .mine            <p class="mt-3">
+                <input type="submit" value="حفظ" class="btn btn-primary" />
+                <a href="/MedicalServices/Index" class="btn btn-outline-info">رجوع الى القائمة</a>
+            </p>
+                   
+=======                    <div align="center">
+
+                        <input type="submit" value="Create" class="btn btn-primary" />
+
+                        <a href="/MedicalServices/Index" class="btn btn-outline-info"> رجوع  </a>
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+                    </div>
+>>>>>>> .theirs                </div>
+            </div>
+       
+               </fieldset>
+                }
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }

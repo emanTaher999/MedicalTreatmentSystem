@@ -1,0 +1,47 @@
+﻿@model MedicalTreatment.Models.JOBTITLE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>المسميات الوظيفية</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="card p-4 shadow">
+        <legend class="bg-custom shadow  px-3">إضافة</legend>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.NAME)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.NAME , new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NAME)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.NAMEEN)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.NAMEEN , new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NAMEEN)
+                </div>
+                </div>
+            </div>
+
+        <p class="mt-3">
+
+            <a href="/JobTitle/Index" class="btn btn-outline-info">عودة للقائمة</a>
+            <input type="submit" class="btn btn-primary" value="حفظ" />
+        </p>
+</fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

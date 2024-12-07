@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using MedicalTreatment.Models;
+
+namespace MedicalTreatment.Controllers
+{
+    public class MedicalDetailServiceController : Controller
+    {
+        private Entities db = new Entities();
+
+        //
+        // GET: /MedicalDetailService/
+
+        public ActionResult Index()
+        {
+            var medicaldetailservices = db.MEDICALDETAILSERVICES.Include(m => m.MEDICALSERVICE);
+            return View(medicaldetailservices.ToList());
+        }
+
+        //
+        // GET: /MedicalDetailService/Details/5
+
+        public ActionResult Details(int id = 0)
+        {
+            MEDICALDETAILSERVICE medicaldetailservice = db.MEDICALDETAILSERVICES.Find(id);
+            if (medicaldetailservice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(medicaldetailservice);
+        }
+
+        //
+        // GET: /MedicalDetailService/Create
+
+        public ActionResult Create()
+        {
+            ViewBag.MEDICALSERVICEID = new SelectList(db.MEDICALSERVICES, "ID", "NAME");
+            return View();
+        }
+
+        //
+        // POST: /MedicalDetailService/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MEDICALDETAILSERVICE medicaldetailservice)
+        {
+            if (ModelState.IsValid)
+            {
+                medicaldetailservice.STATUS = "Active";
+                medicaldetailservice.LASTUPDATED = System.DateTime.Now;
+                db.MEDICALDETAILSERVICES.Add(medicaldetailservice);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.MEDICALSERVICEID = new SelectList(db.MEDICALSERVICES, "ID", "NAME", medicaldetailservice.MEDICALSERVICEID);
+            return View(medicaldetailservice);
+        }
+
+        //
+        // GET: /MedicalDetailService/Edit/5
+
+        public ActionResult Edit(int id = 0)
+        {
+            MEDICALDETAILSERVICE medicaldetailservice = db.MEDICALDETAILSERVICES.Find(id);
+            if (medicaldetailservice == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.MEDICALSERVICEID = new SelectList(db.MEDICALSERVICES, "ID", "NAME", medicaldetailservice.MEDICALSERVICEID);
+            return View(medicaldetailservice);
+        }
+
+        //
+        // POST: /MedicalDetailService/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MEDICALDETAILSERVICE medicaldetailservice)
+        {
+            if (ModelState.IsValid)
+            {
+                medicaldetailservice.STATUS = "Active";
+                medicaldetailservice.LASTUPDATED = DateTime.Now;
+                db.Entry(medicaldetailservice).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.MEDICALSERVICEID = new SelectList(db.MEDICALSERVICES, "ID", "NAME", medicaldetailservice.MEDICALSERVICEID);
+            return View(medicaldetailservice);
+        }
+
+        //
+        // GET: /MedicalDetailService/Delete/5
+
+        public ActionResult Delete(int id = 0)
+        {
+            MEDICALDETAILSERVICE medicaldetailservice = db.MEDICALDETAILSERVICES.Find(id);
+            if (medicaldetailservice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(medicaldetailservice);
+        }
+
+        //
+        // POST: /MedicalDetailService/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            MEDICALDETAILSERVICE medicaldetailservice = db.MEDICALDETAILSERVICES.Find(id);
+            db.MEDICALDETAILSERVICES.Remove(medicaldetailservice);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+    }
+}

@@ -1,0 +1,108 @@
+﻿@model MedicalTreatment.Models.MEDICALDETAILSERVICE
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-hand-holding-medical"></i>تفاصيل  الخدمات الطبية  </h2>
+</div>
+<fieldset class="card shadow mx-auto w-75 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("اسم الخدمة الطبية")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.MEDICALSERVICE.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                الإسم بالعربي
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                الإسم بالانجليزي
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.NAMEEN)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("تشمل الخدمة")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.SERVICEINCLUDE)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("نوع السقف")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.CEILINGTYPE)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("المريض")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.INPATIENT)
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("مريض خارجي")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.OUTPATIENT)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("خارج التغطية")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.OUTOFNETWORK)
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("قبل الموافقة")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.PREAPPROVE)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("الحالة")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.STATUS)
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.Label("اخر تحديث")
+            </div>
+            <div class="alert alert-info">
+                @Html.DisplayFor(model => model.LASTUPDATED)
+            </div>
+        </div>
+    </div>
+</fieldset>
+<p class="mt-3 d-flex justify-content-end w-50">
+    <a href="/MedicalDetailService/Index" class="btn btn-outline-info mx-2">عودة للقائمة</a>
+    @*<a href="/MedicalDetailService/Edit/@Model.ID" type="submit" class="btn btn-success"> تعديل</a>*@
+</p>

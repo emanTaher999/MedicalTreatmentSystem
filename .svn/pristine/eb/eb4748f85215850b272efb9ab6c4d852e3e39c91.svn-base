@@ -1,0 +1,374 @@
+﻿@model List<MedicalTreatment.Models.MEDICALCLAIMFORMDETAIL>
+@using MedicalTreatment.Models
+@{
+    var FormDetail = Model.ToArray();
+    ViewBag.Title = "MedicalClaimFormDetail";
+    var medICALCLAIMFORMDETAIL = TempData["masterListData"];
+    var x22 = ViewData["ENTITLEMENTPERCENT"] + "%";
+}
+
+<hr />
+
+@for (int i = 0; i < Model.ToArray().Length; i++)
+{
+    <h2>تفاصيل المعلومات الطبية</h2>
+    <div id="list_item" style="margin-top:20px">
+        <div class="control-group">
+            <div id="medICALCLAIMFORMDETAIL" class="controls">
+                <div class="row my-2">
+                    <div class="col-md-3">
+                        @Html.Label("نوع الخدمة")
+                        @Html.DropDownListFor(model => model[i].SERVICEFEESTYPEID, ViewBag.SERVICEFEESTYPEID as SelectList, "---أختر---", new { @class = "form-control", @id = "SERVICEFEESTYPEID" + i, @name = "SERVICEFEESTYPEID" + i })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("المبلغ")
+                     
+                        @Html.TextBoxFor(model => model[i].AMOUNT, "{0:#,###,###.##}", new { @class = "form-control", @id = "AMOUNT" + i, @name = "AMOUNT" + i, onchange = "digitGrouping(this.value)" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("وحدة القياس")
+                        @Html.DropDownListFor(model => model[i].UNITID, ViewBag.UNITID as SelectList,  "---أختر---", new { @class = "form-control", @id = "UNITID" + i, @name = "UNITID" + i })
+                    </div>
+                    <div class="col-md-3">
+                        @*getXsum(this.value);*@
+                        @Html.Label("عدد الوحدات")
+                        @Html.TextBoxFor(model => model[i].NUMBEROFUNITS, String.Empty, new { @class = "form-control", @id = "NUMBEROFUNITS" + i, onchange = "getTOTAL(this); GetTotalPer(this); ", @name = "NUMBEROFUNITS" + i })
+
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-3">
+                        @*//"model['" + i + "'].TOTALAMOUNT"*@
+                        @Html.Label("مجموع المبلغ")
+                        @Html.TextBoxFor(model => model[i].TOTALAMOUNT, "{0:#,###,###.##}", new { @class = "form-control", @readonly = "readonly", @id = "TOTALAMOUNTD" + i, @name = "TOTALAMOUNTD" + i, onchange = "digitGrouping(this.value)" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("نسبة الإستحقاق")
+                        @Html.TextBox("ENTITLEMENTPERCENT", String.Empty, new { @class = "form-control", @id = "ENTITLEMENTPERCENT" + i, @name = "ENTITLEMENTPERCENT" + i, @Value = x22, @readonly = "readonly" })
+
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("مبلغ الإستحقاق")
+                        @Html.TextBoxFor(model => model[i].ENTITLEMENTAMOUNT, String.Empty, new { @class = "form-control", @id = "ENTITLEMENTAMOUNT" + i, @name = "ENTITLEMENTAMOUNT" + i, @readonly = "readonly" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.Label("المبلغ المصدق")
+                        @Html.TextBox("APPROVEDAMOUNT", String.Empty, new
+               {
+                   @class = "form-control",
+                   @id = "APPROVEDAMOUNTD" + i,
+                   @name = "APPROVEDAMOUNTD" + i,
+                   onchange = "CheckTotalApproveDet(this);", @readonly = "readonly" })
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+}
+@*@section Scripts {*@
+
+<script src="~/Scripts2/Common/Common.js"></script>
+<script src="~/Scripts2/chosen_v1.6.2/chosen.jquery.js"></script>
+<script src="~/Scripts2/chosen_v1.6.2/prism.js"></script>
+<link href="~/Scripts2/chosen_v1.6.2/chosen.min.css" rel="stylesheet" />
+<link href="~/Scripts2/chosen_v1.6.2/prism.css" rel="stylesheet" />
+<script src="~/Scripts2/Common/Common.js"></script>
+
+
+<script type="text/javascript">
+//    function getXsum(i) {
+//        debugger
+//        var count = new Number;
+//        var checkNOF = document.getElementById('number').value;
+//        var originalamount = document.getElementById('TOTALCLAIMAMOUNT').value;
+//        var wishbutton2 = document.getElementById('TOTALAMOUNTD' + i + '');
+
+
+//        var finalsum = new Number;
+//        var getamount = new Number;
+//        var temp = removeCommas(originalamount);
+//        var test = $("[id= 'TOTALAMOUNTD0']").val();
+//        //var test = $("[id = 'details[0].AMOUNT']").val();
+
+//        if (checkNOF != null) {
+//            count = checkNOF;
+//        } else {
+//            count = 0;
+//        }
+//        for (var i = 0; i < checkNOF; i++) {
+
+//            // var testt = removeCommas($("[id = 'details[" + i + "].AMOUNT']").val());
+//            var testt = removeCommas('#TOTALAMOUNTD' + i + '').val();
+//            //var _AMOUNT = $('#AMOUNT' + num + '').val();
+//            var abstractvalue = parseFloat(testt);
+//            getamount = parseFloat(abstractvalue + getamount);
+
+//        }
+
+
+//        if (getamount > temp) {
+
+
+//            Swal.fire(
+//'',
+//'لا يسمح ان يكون مجموع المبلغ أكبر من جملة مبلغ العلاج',
+//'error'
+//)
+//            // ShowFeedback('تحذير', 'يجب أن يتساوى مجموع القيم بالمبلغ', 'Warning');
+//            $("#AMOUNT").val();
+//            CreateButton.disabled = true;
+
+//        } else {
+//            HideFeedback();
+//            CreateButton.disabled = false;
+
+//        }
+//    }
+
+
+    function removeCommas(str) {
+        while (str.search(",") >= 0) {
+            str = (str + "").replace(',', '');
+        }
+        return str;
+    }
+    function groupingExecute(vlue) {
+        var auth = vlue.toString("{0:##,##.##}");
+        var offset = vlue.length % 3;
+        if (offset == 0)
+            auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/([0-9]{3})(?=[0-9]+)/g, "$1,");
+        else
+            auth = vlue.substring(0, offset) + vlue.substring(offset).replace(/([0-9]{3})/g, ",$1");
+
+        return auth;
+    }
+    ////
+
+    function addCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(",");
+    }
+
+
+    function digitGrouping(id) {
+        var final = "";
+        var temp = "";
+        var vlue = $('#' + id).val();
+        var res = vlue.split(".");
+        if (res.length === 1) {
+            temp = removeCommas(vlue);
+            final = groupingExecute(temp);
+        }
+        else {
+            temp = removeCommas(res[0]);
+            final = groupingExecute(temp);
+            temp = removeCommas(res[1]);
+            final = final + "." + groupingExecute(temp);
+        }
+        //auth = auth.replace(/,/g, "");
+        $('#' + id).val(final);
+    }
+    function getStructure() {
+        var _INDIVIDUALID = $('#INDIVIDUALID').val()
+        var input = { INDIVIDUALID: _INDIVIDUALID };
+        debugger
+
+        $.ajax({
+
+            url: '/MedicalClaimForm/getStruc',
+            type: "POST",
+            data: JSON.stringify(input),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                $("#MAINORGANISATIONID").val(data.MAINORGANISATIONID);
+                $("#ORGANISATIONID").val(data.ORGANISATIONID);
+                $("#DEPARTMENTID").val(data.DEPARTMENTID);
+                $("#SECTIONID").val(data.SECTIONID);
+
+            },
+            error: function () {
+            }
+        });
+    }
+
+
+    function getPATIENTID(id) {
+        debugger
+        var PATIENTEMPLOYEE = $('#PATIENTEMPLOYEE').val();
+        if (PATIENTEMPLOYEE == "No") {
+
+            var _INDIVIDUALID = $('#INDIVIDUALID').val()
+            var input = { INDIVIDUALID: _INDIVIDUALID };
+            $('#PATIENTID').prop("readonly", false);
+            GetDropDown(input, "/MedicalClaimForm/getSponsors", "PATIENTID", " ", true);
+
+        }
+        else if (PATIENTEMPLOYEE == "Yes") {
+
+            var _INDIVIDUALID = $('#INDIVIDUALID').val()
+            var input = { INDIVIDUALID: _INDIVIDUALID };
+            $('#PATIENTID').prop("readonly", true);
+            GetDropDown(input, "/MedicalClaimForm/getEmpName", "PATIENTID", " ", true);
+
+        }
+    }
+
+
+    function checkMedicalService(id) {
+
+
+        var _MEDICALSERVICEID = $('#MEDICALSERVICEID').val();
+        var _PATIENTEMPLOYEE = $("#PATIENTEMPLOYEE").val();
+        var _INDIVIDUALID = $('#INDIVIDUALID').val()
+
+        var input = { MEDICALSERVICEID: _MEDICALSERVICEID, PATIENTEMPLOYEE: _PATIENTEMPLOYEE, INDIVIDUALID: _INDIVIDUALID };
+
+        debugger
+        //var output;
+        $.ajax({
+
+            url: '/MedicalClaimForm/CheckMedicalService',
+            type: "POST",
+            data: JSON.stringify(input),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                debugger
+                if (data === 'Exist') {
+                    $('#errMsgAr').show();
+                    $('#MEDICALSERVICEID').val = null
+                }
+                else {
+                    $('#errMsgAr').hide();
+                }
+                if (data === 'Exist2') {
+                    $('#errMsgAr2').show();
+                }
+                else {
+                    $('#errMsgAr2').show();
+                }
+
+            },
+
+            error: function () {
+            }
+        });
+    }
+
+    function getTOTAL(_this) {
+        debugger
+        var target = _this.id;
+
+        var num = target.replace(/^\D+|\D+$/g, "");
+        alert(num + " ");
+        var _AMOUNT = $("[id = 'model[" + num + "].AMOUNT']").val();// $('#AMOUNT').val();
+        var _NUMBEROFUNITS = $("[id = 'model[" + num + "].NUMBEROFUNITS']").val() //$('#NUMBEROFUNITS').val();
+
+        var input = { AMOUNT: _AMOUNT, NUMBEROFUNITS: _NUMBEROFUNITS };
+        $.ajax({
+
+            url: '/MedicalClaimForm/GetTOTAL',
+            type: "POST",
+            data: JSON.stringify(input),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+
+                if (data != null) {
+                    $('#TOTALAMOUNT').val(data);
+                  
+                }
+                else {
+                    $('#TOTALAMOUNT').val("");
+                }
+
+            },
+
+            error: function () {
+            }
+        });
+    }
+
+    function CheckTotalApproveDet(_this) {
+
+        var num = _this.name.replace(/^\D+|\D+$/g, "");
+
+        debugger
+
+        var _TOTALAMOUNT = $('#TOTALAMOUNT' + num + '').val();
+        var _APPROVEDAMOUNT1 = $('#APPROVEDAMOUNT1' + num + '').val();
+
+        input = {
+            TOTALAMOUNT: _TOTALAMOUNT,
+            APPROVEDAMOUNT1: _APPROVEDAMOUNT
+        };
+        $.ajax({
+            url: '/MedicalClaimForm/CheckApproveTotalDET',
+            type: "POST",
+            data: JSON.stringify(input),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data === true) {
+                    Swal.fire(
+'',
+'لا يسمح ان يكون المبلغ المصدق أعلى من مجموع المبلغ',
+'error'
+)
+                    $('#CreateButton').prop("disabled", true);
+                    $('#CreateButton').prop("readonly", true);
+                }
+                else {
+                    $('#CreateButton').prop("disabled", false);
+                    $('#CreateButton').prop("readonly", false);
+
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+    function GetDropDown(input, url, targetId, defaultValue, withdefaultValue) {
+        var target = $('select[name="' + targetId + '"]');
+        //var target = $('#' + targetId);
+        $.ajax({
+            url: url,
+            type: "POST",
+            traditional: true,
+            data: JSON.stringify(input),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                target.empty();
+                if (withdefaultValue)
+                    target.append("<option value='" + 0 + "'>" + defaultValue + " </option>");
+                $(data).each(function () {
+                    $(document.createElement('option'))
+		    .attr('value', this.Value)
+		    .text(this.Text)
+		    .appendTo(target);
+                });
+
+                return;
+
+            },
+            error: function () {
+                return;
+            }
+        });
+
+
+    }
+</script>
+
+@*}*@

@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using System.Data.Entity;
+using System.Web.Mvc;
+using MedicalTreatment.Models;
+using PagedList;
+using PagedList.Mvc;
+using System.Data.Entity.Validation;
+
+
+namespace MedicalTreatment.Models
+{
+    public class VMMedicalClaimForm
+    {
+        public MEDICALCLAIMFORM medForm;
+        public List<MEDICALCLAIMFORMDETAIL> medFormDet;
+    }
+}

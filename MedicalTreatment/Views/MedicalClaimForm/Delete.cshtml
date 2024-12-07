@@ -1,0 +1,180 @@
+﻿@model MedicalTreatment.Models.MEDICALCLAIMFORM
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>MEDICALCLAIMFORM</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.INDIVIDUAL.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.INDIVIDUAL.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE3.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE3.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE1.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE1.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ORGANIZATIONSTRUCTURE2.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE2.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PATIENTEMPLOYEE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PATIENTEMPLOYEE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PATIENTID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PATIENTID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MEDICALSERVICE.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MEDICALSERVICE.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MEDICALDETAILSERVICE.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MEDICALDETAILSERVICE.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SICKLEAVESTARTDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SICKLEAVESTARTDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SICKLEAVEENDDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SICKLEAVEENDDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CLAIMDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CLAIMDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EMPLOYEESERVICEUNITDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EMPLOYEESERVICEUNITDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ENTERDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ENTERDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.APPROVEDDATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.APPROVEDDATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TOTALCLAIMAMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TOTALCLAIMAMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ENTITLEMENTAMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ENTITLEMENTAMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.APPROVEDAMOUNT)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.APPROVEDAMOUNT)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CLAIMNOTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CLAIMNOTE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EMPLOYEESERVICEUNITNOTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EMPLOYEESERVICEUNITNOTE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HUMANRESOURCESNOTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HUMANRESOURCESNOTE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STATUS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STATUS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LASTUPDATED)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LASTUPDATED)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

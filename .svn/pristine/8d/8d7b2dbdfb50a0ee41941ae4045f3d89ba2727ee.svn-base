@@ -1,0 +1,45 @@
+﻿@model MedicalTreatment.Models.OCCUPATION
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center"> المهنة</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row my-2">
+        <div class="col-md-4">
+            @Html.Label("الاسم")
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.Label("الاسم بالانجليزي")
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+    </div>
+
+    <div align="center">
+
+        <input type="submit" value="تعديل" class="btn btn-success" />
+        <a href="/Occupation/Index" class="btn btn-outline-info">عودة للقائمة  </a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

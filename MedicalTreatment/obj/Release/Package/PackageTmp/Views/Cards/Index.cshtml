@@ -1,0 +1,144 @@
+﻿@model IPagedList<MedicalTreatment.Models.CARD>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+@if (TempData["AlertMessage"] == "success")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت الاضافة بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "edit")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تمت التعديل بنجاح',
+   'success'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+@if (TempData["AlertMessage"] == "deleted")
+{
+    <script src="~/Content/cdnjs/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        Swal.fire(
+   'نجحت العملية',
+   'تم الحذف بنجاح',
+   'error'
+ )
+        @*window.onload = function () {
+            alert("@TempData["AlertMessage"]");
+            //swal({ title: "Done", text: "done", icon: "error" });
+        }*@
+
+    </script>
+}
+<div class="title-header">
+    <h4 class="d-flex justify-content-center "><i class="mx-2 my-auto fa fa-id-card"></i>البطاقات</h2>
+</div>
+<hr />
+@using (Html.BeginForm("Index", "Cards", FormMethod.Get))
+{
+<div class="d-flex mt-5">
+
+    <div class="form-inline ml-auto" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" />
+        <input type="submit" name="submit" value="بحث" class="btn btn-outline-primary mx-3" />
+    </div>
+    <a href="/Cards/Create" class="btn btn-facebook ">اضافة</a>
+</div>
+}
+<p>
+
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div class="table-responsive">
+    <table class="table table-border table-hover border" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayName("رقم البطاقة")
+                </th>
+                <th>
+                    @Html.DisplayName("اسم الكافل")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ الاصدار")
+                </th>
+                <th>
+                    @Html.DisplayName("تاريخ الانتهاء")
+                </th>
+                <th>
+                    @Html.DisplayName("ملاحظات")
+                </th>
+                <th>
+                    @Html.DisplayName("عدد مرات الطباعة")
+                </th>
+                <th>
+                    @Html.DisplayName("الصورة")
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CARDNUMBER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.INDIVIDUAL.NAME)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ISSUEDATE)*@
+                    @item.ISSUEDATE.ToShortDateString()
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.EXPIRYDATE)*@
+                    @item.EXPIRYDATE.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOTE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PRINTCOUNT)
+                </td>
+                <td>
+                    <img src="/Cards/RetrieveImage/@item.ID" class="img-thumbnail rounded" height="100" width="100" />
+                </td>
+
+                <td>
+                    <a href="/Cards/Edit/@item.ID" class="btn btn-outline-success"><i class="fa fa-pencil-alt"></i>   </a>
+                    |
+                    <a href="/Cards/Details/@item.ID" class="btn btn-outline-info"><i class="fa fa-list"></i>   </a>
+                    |
+                    <a href="/Cards/Delete/@item.ID" class="btn btn-outline-danger"><i class="fa fa-trash"></i>   </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "Cards", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>

@@ -1,0 +1,80 @@
+﻿@model IPagedList<MedicalTreatment.Models.UNIT>
+@using PagedList;
+@using PagedList.Mvc;
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">وحدات القياس</h2>
+
+
+<p>
+    <a href="/Units/Create" class="btn btn-facebook">إضافة</a>
+
+</p>
+
+@using (Html.BeginForm("Index", "Units", FormMethod.Get))
+{
+    <div style="margin-bottom:20px" align="center">
+        <input type="text" name="search" placeholder="بــــحــــث" class="form-control" style="width: 300px; margin-bottom: 10px" />
+        <input type="submit" name="submit" value="بحث " class="btn btn-outline-primary" />
+    </div>
+}
+<div class="table-responsive">
+    <table class="table table-border table-hover" dir="rtl" id="sortedtable">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NAMEEN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().STATUS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().LASTUPDATED)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NAMEEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.STATUS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LASTUPDATED)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-outline-warning" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-outline-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                </tr>
+            }
+        </thead>
+    </table>
+
+    <div class="pager next">
+        @Html.PagedListPager(Model, x => Url.Action("Index", "StructureCodes", new { x, search = Request.QueryString["search"] }))
+    </div>
+</div>
+<link href="~/Scripts/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $("#sortedtable").DataTable();
+</script>

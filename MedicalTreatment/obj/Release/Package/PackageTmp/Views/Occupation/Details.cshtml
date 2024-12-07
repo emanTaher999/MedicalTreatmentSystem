@@ -1,0 +1,43 @@
+﻿@model MedicalTreatment.Models.OCCUPATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">     المهنة </h2>
+
+    <fieldset class="card shadow w-50 p-4" dir="rtl">
+        <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.NAME)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.NAME)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.NAMEEN)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.NAMEEN)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.STATUS)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.STATUS)
+        </div>
+
+        <div class="alert alert-info">
+            @Html.DisplayNameFor(model => model.LASTUPDATED)
+        </div>
+        <div class="alert alert-info">
+            @Html.DisplayFor(model => model.LASTUPDATED)
+        </div>
+    </fieldset>
+<p>
+    @Html.ActionLink("تعديل", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("عودة للقائمة  ", "Index")
+</p>

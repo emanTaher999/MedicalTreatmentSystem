@@ -1,0 +1,50 @@
+﻿@model MedicalTreatment.Models.STRUCTURECODE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">هيكل المؤسسة</h2>
+
+<fieldset>
+  
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NAMEEN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAMEEN)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STRUCTURESEQUENCE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STRUCTURESEQUENCE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STATUS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STATUS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LASTUPDATED)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LASTUPDATED)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

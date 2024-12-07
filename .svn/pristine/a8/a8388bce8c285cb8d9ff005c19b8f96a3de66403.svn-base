@@ -1,0 +1,37 @@
+﻿@model MedicalTreatment.Models.OCCUPATION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center"> المهنة</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div class="row my-2">
+    <div class="col-md-4">
+        @Html.LabelFor(model => model.NAME)
+        <div>
+            @Html.TextBoxFor(model => model.NAME, new { @class = "form-control", @disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.NAME)
+        </div>
+    </div>
+    <div class="col-md-4">
+        @Html.LabelFor(model => model.NAMEEN)
+        <div>
+            @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control", @disabled = "disabled" })
+            @Html.ValidationMessageFor(model => model.NAMEEN)
+        </div>
+    </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    
+        <div align="center">
+
+            <input type="submit" value="Delete" class="btn btn-outline-danger" />
+            <a href="/Occupation/Index" class="btn btn-outline-info">Back to List</a>
+            @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+        </div>
+    }

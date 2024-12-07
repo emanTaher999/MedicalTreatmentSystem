@@ -1,0 +1,158 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">  الخدمات الطبية</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+              
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NAME)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NAMEEN)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SERVICEINCLUDE)
+                    <div>
+                        @*@Html.TextBoxFor(model => model.SERVICEINCLUDE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SERVICEINCLUDE)*@
+
+
+                        @Html.DropDownListFor(model => model.SERVICEINCLUDE, new List<SelectListItem>{ new SelectListItem{
+                      Text="EmployeeOnly",
+                      Value = "EmployeeOnly"
+                  },
+       new SelectListItem{
+                      Text="EmployeeAndFamily",
+                      Value = "EmployeeAndFamily"
+                  }}, "---اختر---", new { @class = "form-control" })
+                        @Html.ValidationMessage("SERVICEINCLUDE")
+
+                    </div>
+                </div>
+            </div>
+
+                <div class="row my-2">
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.APPLICABLEFOR)
+                        <div>
+                            @*@Html.TextBoxFor(model => model.APPLICABLEFOR, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.APPLICABLEFOR)*@
+
+
+                            @Html.DropDownListFor(model => model.APPLICABLEFOR, new List<SelectListItem>{ new SelectListItem{
+                 Text="Male",
+                 Value = "Male"
+             },
+  new SelectListItem{
+                 Text="Female",
+                 Value = "Female"
+             }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("APPLICABLEFOR")
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.CEILINGTYPE)
+                        <div>
+                            @*@Html.TextBoxFor(model => model.CEILINGTYPE, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CEILINGTYPE)*@
+
+
+                            @Html.DropDownListFor(model => model.CEILINGTYPE, new List<SelectListItem>{ new SelectListItem{
+        Text="DetailService",
+        Value = "DetailService"
+    },
+new SelectListItem{
+        Text="WholeCeiling",
+        Value = "WholeCeiling"
+},
+new SelectListItem{
+        Text="Service",
+        Value = "Service"
+    }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("CEILINGTYPE")
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.LIMITSERVICE)
+                        <div>
+                            @*@Html.TextBoxFor(model => model.LIMITSERVICE, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LIMITSERVICE)*@
+
+                            @Html.DropDownListFor(model => model.LIMITSERVICE, new List<SelectListItem>{ new SelectListItem{
+        Text="Yes",
+        Value = "Yes"
+    },
+new SelectListItem{
+        Text="No",
+        Value = "No"
+    }}, "---اختر---", new { @class = "form-control" })
+                            @Html.ValidationMessage("LIMITSERVICE")
+
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-md-4">
+                        @Html.LabelFor(model => model.STATUS)
+                        <div>
+                            @Html.TextBoxFor(model => model.STATUS, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.STATUS)
+                        </div>
+                    </div>*@
+
+
+                    @*<div class="col-md-4">
+                        @Html.LabelFor(model => model.LASTUPDATED)
+                        <div>
+                            @Html.TextBoxFor(model => model.LASTUPDATED, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(model => model.LASTUPDATED)
+                        </div>
+                    </div>*@
+                </div>
+                    <div align="center">
+
+                        <input type="submit" value="Create" class="btn btn-primary" />
+
+                        <a href="/MedicalServices/Index" class="btn btn-outline-info"> Back to List  </a>
+                        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+                    </div>
+                </div>
+            </div>
+       
+                @*</fieldset>*@
+                }
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }

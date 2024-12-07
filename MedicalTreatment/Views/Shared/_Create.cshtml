@@ -1,0 +1,102 @@
+﻿@model Kafala_System.Models.CHILDDATA
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CHILDDATA</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FAMILYDATAID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FAMILYDATAID)
+            @Html.ValidationMessageFor(model => model.FAMILYDATAID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NAME)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NAME)
+            @Html.ValidationMessageFor(model => model.NAME)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GENDER)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GENDER)
+            @Html.ValidationMessageFor(model => model.GENDER)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DATEOFBIRTH)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DATEOFBIRTH)
+            @Html.ValidationMessageFor(model => model.DATEOFBIRTH)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EDUCATIONLEVELID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EDUCATIONLEVELID)
+            @Html.ValidationMessageFor(model => model.EDUCATIONLEVELID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HEALTHSTATUSID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HEALTHSTATUSID)
+            @Html.ValidationMessageFor(model => model.HEALTHSTATUSID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ISWORK)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ISWORK)
+            @Html.ValidationMessageFor(model => model.ISWORK)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OCCUPATIONID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OCCUPATIONID)
+            @Html.ValidationMessageFor(model => model.OCCUPATIONID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STATUS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STATUS)
+            @Html.ValidationMessageFor(model => model.STATUS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LASTUPDATED)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LASTUPDATED)
+            @Html.ValidationMessageFor(model => model.LASTUPDATED)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

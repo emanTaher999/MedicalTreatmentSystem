@@ -1,0 +1,109 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICE
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">  الخدمات الطبية</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <legend>MEDICALSERVICE</legend>
+
+    <div class="card pt-2">
+        <div class="card-body">
+            <div class="row my-2">
+
+                @Html.HiddenFor(model => model.ID)
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NAME)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAME , new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAME)
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NAMEEN)
+                    <div>
+                        @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NAMEEN)
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SERVICEINCLUDE)
+                    <div>
+                        @Html.TextBoxFor(model => model.SERVICEINCLUDE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SERVICEINCLUDE)
+                    </div>
+                </div>
+         
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.APPLICABLEFOR)
+                    <div>
+                        @Html.TextBoxFor(model => model.APPLICABLEFOR, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.APPLICABLEFOR)
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.CEILINGTYPE)
+                    <div>
+                        @Html.TextBoxFor(model => model.CEILINGTYPE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CEILINGTYPE)
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.LIMITSERVICE)
+                    <div>
+                        @Html.TextBoxFor(model => model.LIMITSERVICE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.LIMITSERVICE)
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-4">
+                    @Html.LabelFor(model => model.STATUS)
+                    <div>
+                        @Html.EditorFor(model => model.STATUS)
+                        @Html.ValidationMessageFor(model => model.STATUS)
+                    </div>
+                </div>*@
+
+
+                @*<div class="col-md-4">
+                    @Html.LabelFor(model => model.LASTUPDATED)
+                    <div>
+                        @Html.EditorFor(model => model.LASTUPDATED)
+                        @Html.ValidationMessageFor(model => model.LASTUPDATED)
+                    </div>
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+
+
+        <div align="center">
+
+            <input type="submit" value="Save" class="btn btn-success" />
+            <a href="/MedicalServices/Index" class="btn btn-outline-info"> Back to List  </a>
+            @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+        </div>
+ 
+        }
+
+   
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }

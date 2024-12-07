@@ -1,0 +1,74 @@
+﻿@model MedicalTreatment.Models.MEDICALSERVICECEILING
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MEDICALSERVICECEILING</legend>
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.MEDICALSERVICE.NAME)
+                <div>
+                    @Html.DisplayFor(model => model.MEDICALSERVICE.NAME)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.MEDICALDETAILSERVICE.NAME)
+                <div>
+                    @Html.DisplayFor(model => model.MEDICALDETAILSERVICE.NAME)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.YEAR)
+                <div>
+                    @Html.DisplayFor(model => model.YEAR)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.CEILING)
+                <div>
+                    @Html.DisplayFor(model => model.CEILING)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.STATUS)
+                <div>
+                    @Html.DisplayFor(model => model.STATUS)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-info">
+                @Html.DisplayNameFor(model => model.LASTUPDATED)
+                <div>
+                    @Html.DisplayFor(model => model.LASTUPDATED)
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <div align="center">
+            <a href="/MedicalServiceCeiling/Index" class="btn btn-outline-info">رجوع</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>

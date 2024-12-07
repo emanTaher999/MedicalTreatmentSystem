@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="COMPANYPOLICies">
+      <EntityTypeMapping TypeName="Model.COMPANYPOLICY">
+        <MappingFragment StoreEntitySet="COMPANYPOLICY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ORGANIZATIONID" ColumnName="ORGANIZATIONID" />
+          <ScalarProperty Name="EFFECTDATE" ColumnName="EFFECTDATE" />
+          <ScalarProperty Name="EMPLOYEESAMECEILING" ColumnName="EMPLOYEESAMECEILING" />
+          <ScalarProperty Name="COVERAGEPERCENT" ColumnName="COVERAGEPERCENT" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GENERALCEILINGs">
+      <EntityTypeMapping TypeName="Model.GENERALCEILING">
+        <MappingFragment StoreEntitySet="GENERALCEILING">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="YEAR" ColumnName="YEAR" />
+          <ScalarProperty Name="CEILING" ColumnName="CEILING" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INDIVIDUALS">
+      <EntityTypeMapping TypeName="Model.INDIVIDUAL">
+        <MappingFragment StoreEntitySet="INDIVIDUALS">
+          <ScalarProperty Name="JOBTITLEID" ColumnName="JOBTITLEID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="MAINORGANISATIONID" ColumnName="MAINORGANISATIONID" />
+          <ScalarProperty Name="ORGANISATIONID" ColumnName="ORGANISATIONID" />
+          <ScalarProperty Name="DEPARTMENTID" ColumnName="DEPARTMENTID" />
+          <ScalarProperty Name="SECTIONID" ColumnName="SECTIONID" />
+          <ScalarProperty Name="MARITALSTATUS" ColumnName="MARITALSTATUS" />
+          <ScalarProperty Name="RELATIONID" ColumnName="RELATIONID" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="MAININDIVIDUALID" ColumnName="MAININDIVIDUALID" />
+          <ScalarProperty Name="STARTDATE" ColumnName="STARTDATE" />
+          <ScalarProperty Name="TERMINATEDATE" ColumnName="TERMINATEDATE" />
+          <ScalarProperty Name="YEARLYCEILING" ColumnName="YEARLYCEILING" />
+          <ScalarProperty Name="OCCUPATIONID" ColumnName="OCCUPATIONID" />
+          <ScalarProperty Name="JOBNUMBER" ColumnName="JOBNUMBER" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OCCUPATIONs">
+      <EntityTypeMapping TypeName="Model.OCCUPATION">
+        <MappingFragment StoreEntitySet="OCCUPATION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORGANIZATIONPROFILEs">
+      <EntityTypeMapping TypeName="Model.ORGANIZATIONPROFILE">
+        <MappingFragment StoreEntitySet="ORGANIZATIONPROFILE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ORGANIZATIONID" ColumnName="ORGANIZATIONID" />
+          <ScalarProperty Name="LOGO" ColumnName="LOGO" />
+          <ScalarProperty Name="FORMLOGO" ColumnName="FORMLOGO" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORGANIZATIONSTRUCTUREs">
+      <EntityTypeMapping TypeName="Model.ORGANIZATIONSTRUCTURE">
+        <MappingFragment StoreEntitySet="ORGANIZATIONSTRUCTURE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+          <ScalarProperty Name="STRUCTURECODEID" ColumnName="STRUCTURECODEID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RELATIONS">
+      <EntityTypeMapping TypeName="Model.RELATION">
+        <MappingFragment StoreEntitySet="RELATIONS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="MAININDIVIDUAL" ColumnName="MAININDIVIDUAL" />
+          <ScalarProperty Name="MATERNITYAPPLICABLE" ColumnName="MATERNITYAPPLICABLE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STRUCTURECODES">
+      <EntityTypeMapping TypeName="Model.STRUCTURECODE">
+        <MappingFragment StoreEntitySet="STRUCTURECODES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="STRUCTURESEQUENCE" ColumnName="STRUCTURESEQUENCE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JOBTITLES">
+      <EntityTypeMapping TypeName="Model.JOBTITLE">
+        <MappingFragment StoreEntitySet="JOBTITLES">
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="NAMEEN" ColumnName="NAMEEN" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

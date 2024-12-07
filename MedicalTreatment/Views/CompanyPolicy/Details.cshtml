@@ -1,0 +1,64 @@
+﻿@model MedicalTreatment.Models.COMPANYPOLICY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">   لائحة الشركة العامة </h2>
+
+<fieldset class="card shadow w-50 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">التفاصيل</legend>
+
+    <div class="alert alert-info ">
+        <b>  Name   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.ORGANIZATIONSTRUCTURE.NAME)
+        </div>
+    </div>
+
+
+    <div class="alert alert-info ">
+        <b>  EFFECTDATE   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.EFFECTDATE)
+        </div>
+    </div>
+
+
+    <div class="alert alert-info ">
+        <b>  EMPLOYEESAMECEILING   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.EMPLOYEESAMECEILING)
+        </div>
+    </div>
+
+    <div class="alert alert-info ">
+        <b>  COVERAGEPERCENT   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.COVERAGEPERCENT)
+        </div>
+    </div>
+
+
+
+    <div class="alert alert-info ">
+        <b>  STATUS   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.STATUS)
+        </div>
+    </div>
+
+    <div class="alert alert-info ">
+        <b>  LASTUPDATED   </b>
+        <div class="">
+            @Html.DisplayFor(model => model.LASTUPDATED)
+        </div>
+    </div>
+
+  
+</fieldset>
+<p class="mt-3 d-flex justify-content-end mx-auto w-75">
+    <a href="/CompanyPolicy/Index" class="btn btn-outline-info mx-2"> رجوع</a>
+    <a href="/CompanyPolicy/Edit/@Model.ID" type="submit" class="btn btn-success"> تعديل</a>
+
+</p>

@@ -1,0 +1,47 @@
+﻿@model MedicalTreatment.Models.UNIT
+           @using MedicalTreatment.Resources
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="btn btn-outline-dark d-flex justify-content-center">Units</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row my-2">
+        <br />
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.NAME)
+            <div>
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.NAMEEN)
+            <div>
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+
+
+
+    </div>
+    <br />
+    <div align="center">
+
+        <input type="submit" value="Create" class="btn btn-primary" />
+
+        <a href="/StructureCodes/Index" class="btn btn-outline-info">Back to List</a>
+        @*@Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-info" })*@
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="COMPANYPOLICY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="ORGANIZATIONID" Type="Int32" Nullable="false" />
+    <Property Name="EFFECTDATE" Type="DateTime" Nullable="false" />
+    <Property Name="EMPLOYEESAMECEILING" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="COVERAGEPERCENT" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Self.FKCOMPANYPOLICYORGSTRUCTURE" FromRole="COMPANYPOLICY" ToRole="ORGANIZATIONSTRUCTURE" />
+  </EntityType>
+  <EntityType Name="GENERALCEILING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" />
+    <Property Name="YEAR" Type="Int16" Nullable="false" />
+    <Property Name="CEILING" Type="Decimal" Precision="24" Scale="2" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OCCUPATION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Model.FKINDIVIDUALOCCUPATION" FromRole="OCCUPATION" ToRole="INDIVIDUAL" />
+  </EntityType>
+  <EntityType Name="ORGANIZATIONPROFILE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="ORGANIZATIONID" Type="Int32" Nullable="false" />
+    <Property Name="LOGO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FORMLOGO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ADDRESS" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Self.FKORGANIZATIONPROFILESTRUCTURE" FromRole="ORGANIZATIONPROFILE" ToRole="ORGANIZATIONSTRUCTURE" />
+  </EntityType>
+  <EntityType Name="ORGANIZATIONSTRUCTURE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="PARENTID" Type="Int32" />
+    <Property Name="STRUCTURECODEID" Type="Int16" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="COMPANYPOLICies" Relationship="Self.FKCOMPANYPOLICYORGSTRUCTURE" FromRole="ORGANIZATIONSTRUCTURE" ToRole="COMPANYPOLICY" />
+    <NavigationProperty Name="ORGANIZATIONPROFILEs" Relationship="Self.FKORGANIZATIONPROFILESTRUCTURE" FromRole="ORGANIZATIONSTRUCTURE" ToRole="ORGANIZATIONPROFILE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE1" Relationship="Self.FKORGANIZATIONSTRUCTUREPARENT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="ORGANIZATIONSTRUCTURE1" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE2" Relationship="Self.FKORGANIZATIONSTRUCTUREPARENT" FromRole="ORGANIZATIONSTRUCTURE1" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Model.FKINDIVIDUALSORGSTRUCDEPT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="INDIVIDUALS1" Relationship="Model.FKINDIVIDUALSORGSTRUCMAIN" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="INDIVIDUALS2" Relationship="Model.FKINDIVIDUALSORGSTRUCORG" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="INDIVIDUALS3" Relationship="Model.FKINDIVIDUALSORGSTRUCSECT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs" Relationship="Model.FKMEDICALCLAIMFORMINDVDEPT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="MEDICALCLAIMFORM" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs1" Relationship="Model.FKMEDICALCLAIMFORMINDVORG" FromRole="ORGANIZATIONSTRUCTURE" ToRole="MEDICALCLAIMFORM" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs2" Relationship="Model.FKMEDICALCLAIMFORMINDVSECT" FromRole="ORGANIZATIONSTRUCTURE" ToRole="MEDICALCLAIMFORM" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs3" Relationship="Model.FKMEDICALCLAIMFORMMAINORG" FromRole="ORGANIZATIONSTRUCTURE" ToRole="MEDICALCLAIMFORM" />
+  </EntityType>
+  <EntityType Name="RELATION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GENDER" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MAININDIVIDUAL" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MATERNITYAPPLICABLE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Model.FKINDIVIDUALSRELATION" FromRole="RELATION" ToRole="INDIVIDUAL" />
+  </EntityType>
+  <EntityType Name="STRUCTURECODE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" />
+    <Property Name="NAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STRUCTURESEQUENCE" Type="Int16" Nullable="false" />
+    <Property Name="STATUS" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <Association Name="FKCOMPANYPOLICYORGSTRUCTURE">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="COMPANYPOLICY" Type="Self.COMPANYPOLICY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="COMPANYPOLICY">
+        <PropertyRef Name="ORGANIZATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKORGANIZATIONPROFILESTRUCTURE">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Role="ORGANIZATIONPROFILE" Type="Self.ORGANIZATIONPROFILE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORGANIZATIONPROFILE">
+        <PropertyRef Name="ORGANIZATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKORGANIZATIONSTRUCTUREPARENT">
+    <End Role="ORGANIZATIONSTRUCTURE" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Role="ORGANIZATIONSTRUCTURE1" Type="Self.ORGANIZATIONSTRUCTURE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORGANIZATIONSTRUCTURE1">
+        <PropertyRef Name="PARENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="COMPANYPOLICies" EntityType="Self.COMPANYPOLICY" />
+    <EntitySet Name="GENERALCEILINGs" EntityType="Self.GENERALCEILING" />
+    <EntitySet Name="OCCUPATIONs" EntityType="Self.OCCUPATION" />
+    <EntitySet Name="ORGANIZATIONPROFILEs" EntityType="Self.ORGANIZATIONPROFILE" />
+    <EntitySet Name="ORGANIZATIONSTRUCTUREs" EntityType="Self.ORGANIZATIONSTRUCTURE" />
+    <EntitySet Name="RELATIONS" EntityType="Self.RELATION" />
+    <EntitySet Name="STRUCTURECODES" EntityType="Self.STRUCTURECODE" />
+    <AssociationSet Name="FKCOMPANYPOLICYORGSTRUCTURE" Association="Self.FKCOMPANYPOLICYORGSTRUCTURE">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="COMPANYPOLICY" EntitySet="COMPANYPOLICies" />
+    </AssociationSet>
+    <AssociationSet Name="FKORGANIZATIONPROFILESTRUCTURE" Association="Self.FKORGANIZATIONPROFILESTRUCTURE">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="ORGANIZATIONPROFILE" EntitySet="ORGANIZATIONPROFILEs" />
+    </AssociationSet>
+    <AssociationSet Name="FKORGANIZATIONSTRUCTUREPARENT" Association="Self.FKORGANIZATIONSTRUCTUREPARENT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="ORGANIZATIONSTRUCTURE1" EntitySet="ORGANIZATIONSTRUCTUREs" />
+    </AssociationSet>
+    <EntitySet Name="JOBTITLES" EntityType="Model.JOBTITLE" />
+    <EntitySet Name="CARDS" EntityType="Model.CARD" />
+    <EntitySet Name="SUPPLIERS" EntityType="Model.SUPPLIER" />
+    <EntitySet Name="SUPPLIERTYPES" EntityType="Model.SUPPLIERTYPE" />
+    <EntitySet Name="UNITS" EntityType="Model.UNIT" />
+    <EntitySet Name="MEDICALDETAILSERVICES" EntityType="Model.MEDICALDETAILSERVICE" />
+    <EntitySet Name="MEDICALSERVICECEILINGs" EntityType="Model.MEDICALSERVICECEILING" />
+    <EntitySet Name="MEDICALSERVICES" EntityType="Model.MEDICALSERVICE" />
+    <AssociationSet Name="FKMEDICALDETSERVMEDSERV" Association="Model.FKMEDICALDETSERVMEDSERV">
+      <End Role="MEDICALSERVICE" EntitySet="MEDICALSERVICES" />
+      <End Role="MEDICALDETAILSERVICE" EntitySet="MEDICALDETAILSERVICES" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALSERVCEILFORMEDDETSER" Association="Model.FKMEDICALSERVCEILFORMEDDETSER">
+      <End Role="MEDICALDETAILSERVICE" EntitySet="MEDICALDETAILSERVICES" />
+      <End Role="MEDICALSERVICECEILING" EntitySet="MEDICALSERVICECEILINGs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALSERVCEILFORMED" Association="Model.FKMEDICALSERVCEILFORMED">
+      <End Role="MEDICALSERVICE" EntitySet="MEDICALSERVICES" />
+      <End Role="MEDICALSERVICECEILING" EntitySet="MEDICALSERVICECEILINGs" />
+    </AssociationSet>
+    <EntitySet Name="INDIVIDUALS" EntityType="Model.INDIVIDUAL" />
+    <EntitySet Name="SERVICEFEESTYPEs" EntityType="Model.SERVICEFEESTYPE" />
+    <AssociationSet Name="FKCARDINDIVIDUAL" Association="Model.FKCARDINDIVIDUAL">
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+      <End Role="CARD" EntitySet="CARDS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALJOBTITLE" Association="Model.FKINDIVIDUALJOBTITLE">
+      <End Role="JOBTITLE" EntitySet="JOBTITLES" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALOCCUPATION" Association="Model.FKINDIVIDUALOCCUPATION">
+      <End Role="OCCUPATION" EntitySet="OCCUPATIONs" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSMAININDV" Association="Model.FKINDIVIDUALSMAININDV">
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+      <End Role="INDIVIDUAL1" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCDEPT" Association="Model.FKINDIVIDUALSORGSTRUCDEPT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCMAIN" Association="Model.FKINDIVIDUALSORGSTRUCMAIN">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCORG" Association="Model.FKINDIVIDUALSORGSTRUCORG">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSORGSTRUCSECT" Association="Model.FKINDIVIDUALSORGSTRUCSECT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <AssociationSet Name="FKINDIVIDUALSRELATION" Association="Model.FKINDIVIDUALSRELATION">
+      <End Role="RELATION" EntitySet="RELATIONS" />
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+    </AssociationSet>
+    <EntitySet Name="MEDICALCLAIMFORMs" EntityType="Model.MEDICALCLAIMFORM" />
+    <EntitySet Name="MEDICALCLAIMFORMDETAILS" EntityType="Model.MEDICALCLAIMFORMDETAIL" />
+    <AssociationSet Name="FKMEDICALCLAIMFORMINDV" Association="Model.FKMEDICALCLAIMFORMINDV">
+      <End Role="INDIVIDUAL" EntitySet="INDIVIDUALS" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMDETMEDFRM" Association="Model.FKMEDICALCLAIMFORMDETMEDFRM">
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+      <End Role="MEDICALCLAIMFORMDETAIL" EntitySet="MEDICALCLAIMFORMDETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMINDVDEPT" Association="Model.FKMEDICALCLAIMFORMINDVDEPT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMINDVORG" Association="Model.FKMEDICALCLAIMFORMINDVORG">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMINDVSECT" Association="Model.FKMEDICALCLAIMFORMINDVSECT">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMMAINORG" Association="Model.FKMEDICALCLAIMFORMMAINORG">
+      <End Role="ORGANIZATIONSTRUCTURE" EntitySet="ORGANIZATIONSTRUCTUREs" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMMEDDETSERV" Association="Model.FKMEDICALCLAIMFORMMEDDETSERV">
+      <End Role="MEDICALDETAILSERVICE" EntitySet="MEDICALDETAILSERVICES" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMMEDSERV" Association="Model.FKMEDICALCLAIMFORMMEDSERV">
+      <End Role="MEDICALSERVICE" EntitySet="MEDICALSERVICES" />
+      <End Role="MEDICALCLAIMFORM" EntitySet="MEDICALCLAIMFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMDETSERVFEE" Association="Model.FKMEDICALCLAIMFORMDETSERVFEE">
+      <End Role="SERVICEFEESTYPE" EntitySet="SERVICEFEESTYPEs" />
+      <End Role="MEDICALCLAIMFORMDETAIL" EntitySet="MEDICALCLAIMFORMDETAILS" />
+    </AssociationSet>
+    <AssociationSet Name="FKMEDICALCLAIMFORMDETUNIT" Association="Model.FKMEDICALCLAIMFORMDETUNIT">
+      <End Role="UNIT" EntitySet="UNITS" />
+      <End Role="MEDICALCLAIMFORMDETAIL" EntitySet="MEDICALCLAIMFORMDETAILS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="JOBTITLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUALS" Relationship="Model.FKINDIVIDUALJOBTITLE" FromRole="JOBTITLE" ToRole="INDIVIDUAL" />
+  </EntityType>
+  <EntityType Name="CARD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CARDNUMBER" Type="Int32" Nullable="false" />
+    <Property Name="INDIVIDUALID" Type="Int32" Nullable="false" />
+    <Property Name="ISSUEDATE" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="EXPIRYDATE" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="NOTE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PRINTCOUNT" Type="Int16" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUAL" Relationship="Model.FKCARDINDIVIDUAL" FromRole="CARD" ToRole="INDIVIDUAL" />
+  </EntityType>
+  <EntityType Name="SUPPLIER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="SUPPLIERTYPEID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SUPPLIERTYPE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UNIT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALCLAIMFORMDETAILS" Relationship="Model.FKMEDICALCLAIMFORMDETUNIT" FromRole="UNIT" ToRole="MEDICALCLAIMFORMDETAIL" />
+  </EntityType>
+  <EntityType Name="MEDICALDETAILSERVICE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="MEDICALSERVICEID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="SERVICEINCLUDE" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="CEILINGTYPE" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="INPATIENT" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="OUTPATIENT" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="OUTOFNETWORK" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="PREAPPROVE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALSERVICE" Relationship="Model.FKMEDICALDETSERVMEDSERV" FromRole="MEDICALDETAILSERVICE" ToRole="MEDICALSERVICE" />
+    <NavigationProperty Name="MEDICALSERVICECEILINGs" Relationship="Model.FKMEDICALSERVCEILFORMEDDETSER" FromRole="MEDICALDETAILSERVICE" ToRole="MEDICALSERVICECEILING" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs" Relationship="Model.FKMEDICALCLAIMFORMMEDDETSERV" FromRole="MEDICALDETAILSERVICE" ToRole="MEDICALCLAIMFORM" />
+  </EntityType>
+  <EntityType Name="MEDICALSERVICECEILING">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="MEDICALSERVICEID" Type="Int32" Nullable="false" />
+    <Property Name="MEDICALDETAILSERVICEID" Type="Int32" Nullable="false" />
+    <Property Name="YEAR" Type="Int16" Nullable="false" />
+    <Property Name="CEILING" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALDETAILSERVICE" Relationship="Model.FKMEDICALSERVCEILFORMEDDETSER" FromRole="MEDICALSERVICECEILING" ToRole="MEDICALDETAILSERVICE" />
+    <NavigationProperty Name="MEDICALSERVICE" Relationship="Model.FKMEDICALSERVCEILFORMED" FromRole="MEDICALSERVICECEILING" ToRole="MEDICALSERVICE" />
+  </EntityType>
+  <EntityType Name="MEDICALSERVICE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="SERVICEINCLUDE" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="APPLICABLEFOR" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="CEILINGTYPE" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LIMITSERVICE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALDETAILSERVICES" Relationship="Model.FKMEDICALDETSERVMEDSERV" FromRole="MEDICALSERVICE" ToRole="MEDICALDETAILSERVICE" />
+    <NavigationProperty Name="MEDICALSERVICECEILINGs" Relationship="Model.FKMEDICALSERVCEILFORMED" FromRole="MEDICALSERVICE" ToRole="MEDICALSERVICECEILING" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs" Relationship="Model.FKMEDICALCLAIMFORMMEDSERV" FromRole="MEDICALSERVICE" ToRole="MEDICALCLAIMFORM" />
+  </EntityType>
+  <Association Name="FKMEDICALDETSERVMEDSERV">
+    <End Type="Model.MEDICALSERVICE" Role="MEDICALSERVICE" Multiplicity="1" />
+    <End Type="Model.MEDICALDETAILSERVICE" Role="MEDICALDETAILSERVICE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALSERVICE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALDETAILSERVICE">
+        <PropertyRef Name="MEDICALSERVICEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALSERVCEILFORMEDDETSER">
+    <End Type="Model.MEDICALDETAILSERVICE" Role="MEDICALDETAILSERVICE" Multiplicity="1" />
+    <End Type="Model.MEDICALSERVICECEILING" Role="MEDICALSERVICECEILING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALDETAILSERVICE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALSERVICECEILING">
+        <PropertyRef Name="MEDICALDETAILSERVICEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALSERVCEILFORMED">
+    <End Type="Model.MEDICALSERVICE" Role="MEDICALSERVICE" Multiplicity="1" />
+    <End Type="Model.MEDICALSERVICECEILING" Role="MEDICALSERVICECEILING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALSERVICE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALSERVICECEILING">
+        <PropertyRef Name="MEDICALSERVICEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="INDIVIDUAL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="BIRTHDATE" Type="DateTime" Nullable="false" />
+    <Property Name="GENDER" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="MAINORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="ORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="DEPARTMENTID" Type="Int32" />
+    <Property Name="SECTIONID" Type="Int32" />
+    <Property Name="MARITALSTATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="RELATIONID" Type="Int32" Nullable="false" />
+    <Property Name="NATIONALITY" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="MAININDIVIDUALID" Type="Int32" />
+    <Property Name="STARTDATE" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="TERMINATEDATE" Type="DateTime" Precision="6" />
+    <Property Name="YEARLYCEILING" Type="Decimal" Precision="24" Scale="2" />
+    <Property Name="OCCUPATIONID" Type="Int32" />
+    <Property Name="JOBNUMBER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="PHOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <Property Name="JOBTITLEID" Type="Int32" />
+    <NavigationProperty Name="CARDS" Relationship="Model.FKCARDINDIVIDUAL" FromRole="INDIVIDUAL" ToRole="CARD" />
+    <NavigationProperty Name="JOBTITLE" Relationship="Model.FKINDIVIDUALJOBTITLE" FromRole="INDIVIDUAL" ToRole="JOBTITLE" />
+    <NavigationProperty Name="OCCUPATION" Relationship="Model.FKINDIVIDUALOCCUPATION" FromRole="INDIVIDUAL" ToRole="OCCUPATION" />
+    <NavigationProperty Name="INDIVIDUALS1" Relationship="Model.FKINDIVIDUALSMAININDV" FromRole="INDIVIDUAL" ToRole="INDIVIDUAL1" />
+    <NavigationProperty Name="INDIVIDUAL1" Relationship="Model.FKINDIVIDUALSMAININDV" FromRole="INDIVIDUAL1" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Model.FKINDIVIDUALSORGSTRUCDEPT" FromRole="INDIVIDUAL" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE1" Relationship="Model.FKINDIVIDUALSORGSTRUCMAIN" FromRole="INDIVIDUAL" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE2" Relationship="Model.FKINDIVIDUALSORGSTRUCORG" FromRole="INDIVIDUAL" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE3" Relationship="Model.FKINDIVIDUALSORGSTRUCSECT" FromRole="INDIVIDUAL" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="RELATION" Relationship="Model.FKINDIVIDUALSRELATION" FromRole="INDIVIDUAL" ToRole="RELATION" />
+    <NavigationProperty Name="MEDICALCLAIMFORMs" Relationship="Model.FKMEDICALCLAIMFORMINDV" FromRole="INDIVIDUAL" ToRole="MEDICALCLAIMFORM" />
+  </EntityType>
+  <EntityType Name="SERVICEFEESTYPE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="NAMEEN" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALCLAIMFORMDETAILS" Relationship="Model.FKMEDICALCLAIMFORMDETSERVFEE" FromRole="SERVICEFEESTYPE" ToRole="MEDICALCLAIMFORMDETAIL" />
+  </EntityType>
+  <Association Name="FKCARDINDIVIDUAL">
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="1" />
+    <End Type="Model.CARD" Role="CARD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INDIVIDUAL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CARD">
+        <PropertyRef Name="INDIVIDUALID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALJOBTITLE">
+    <End Type="Model.JOBTITLE" Role="JOBTITLE" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JOBTITLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="JOBTITLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALOCCUPATION">
+    <End Type="Model.OCCUPATION" Role="OCCUPATION" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OCCUPATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="OCCUPATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSMAININDV">
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INDIVIDUAL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL1">
+        <PropertyRef Name="MAININDIVIDUALID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCDEPT">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="DEPARTMENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCMAIN">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="MAINORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCORG">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="ORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSORGSTRUCSECT">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="SECTIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKINDIVIDUALSRELATION">
+    <End Type="Model.RELATION" Role="RELATION" Multiplicity="1" />
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RELATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INDIVIDUAL">
+        <PropertyRef Name="RELATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MEDICALCLAIMFORM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="24" Scale="0" />
+    <Property Name="INDIVIDUALID" Type="Int32" Nullable="false" />
+    <Property Name="MAINORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="ORGANISATIONID" Type="Int32" Nullable="false" />
+    <Property Name="DEPARTMENTID" Type="Int32" />
+    <Property Name="SECTIONID" Type="Int32" />
+    <Property Name="PATIENTEMPLOYEE" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+    <Property Name="PATIENTID" Type="Int32" Nullable="false" />
+    <Property Name="MEDICALSERVICEID" Type="Int32" Nullable="false" />
+    <Property Name="MEDICALDETAILSERVICEID" Type="Int32" Nullable="false" />
+    <Property Name="SICKLEAVESTARTDATE" Type="DateTime" />
+    <Property Name="SICKLEAVEENDDATE" Type="DateTime" />
+    <Property Name="CLAIMDATE" Type="DateTime" Nullable="false" />
+    <Property Name="EMPLOYEESERVICEUNITDATE" Type="DateTime" Nullable="false" />
+    <Property Name="ENTERDATE" Type="DateTime" Nullable="false" />
+    <Property Name="APPROVEDDATE" Type="DateTime" />
+    <Property Name="TOTALCLAIMAMOUNT" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+    <Property Name="ENTITLEMENTAMOUNT" Type="Decimal" Precision="24" Scale="2" />
+    <Property Name="APPROVEDAMOUNT" Type="Decimal" Precision="24" Scale="2" />
+    <Property Name="CLAIMNOTE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="EMPLOYEESERVICEUNITNOTE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="HUMANRESOURCESNOTE" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="STATUS" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="INDIVIDUAL" Relationship="Model.FKMEDICALCLAIMFORMINDV" FromRole="MEDICALCLAIMFORM" ToRole="INDIVIDUAL" />
+    <NavigationProperty Name="MEDICALCLAIMFORMDETAILS" Relationship="Model.FKMEDICALCLAIMFORMDETMEDFRM" FromRole="MEDICALCLAIMFORM" ToRole="MEDICALCLAIMFORMDETAIL" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE" Relationship="Model.FKMEDICALCLAIMFORMINDVDEPT" FromRole="MEDICALCLAIMFORM" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE1" Relationship="Model.FKMEDICALCLAIMFORMINDVORG" FromRole="MEDICALCLAIMFORM" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE2" Relationship="Model.FKMEDICALCLAIMFORMINDVSECT" FromRole="MEDICALCLAIMFORM" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="ORGANIZATIONSTRUCTURE3" Relationship="Model.FKMEDICALCLAIMFORMMAINORG" FromRole="MEDICALCLAIMFORM" ToRole="ORGANIZATIONSTRUCTURE" />
+    <NavigationProperty Name="MEDICALDETAILSERVICE" Relationship="Model.FKMEDICALCLAIMFORMMEDDETSERV" FromRole="MEDICALCLAIMFORM" ToRole="MEDICALDETAILSERVICE" />
+    <NavigationProperty Name="MEDICALSERVICE" Relationship="Model.FKMEDICALCLAIMFORMMEDSERV" FromRole="MEDICALCLAIMFORM" ToRole="MEDICALSERVICE" />
+  </EntityType>
+  <EntityType Name="MEDICALCLAIMFORMDETAIL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="MEDICALCLAIMFORMID" Type="Decimal" Nullable="false" Precision="24" Scale="0" />
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="24" Scale="0" />
+    <Property Name="SERVICEFEESTYPEID" Type="Int32" Nullable="false" />
+    <Property Name="AMOUNT" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+    <Property Name="UNITID" Type="Int32" Nullable="false" />
+    <Property Name="NUMBEROFUNITS" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="TOTALAMOUNT" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+    <Property Name="ENTITLEMENTPERCENT" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="ENTITLEMENTAMOUNT" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+    <Property Name="LASTUPDATED" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="MEDICALCLAIMFORM" Relationship="Model.FKMEDICALCLAIMFORMDETMEDFRM" FromRole="MEDICALCLAIMFORMDETAIL" ToRole="MEDICALCLAIMFORM" />
+    <NavigationProperty Name="SERVICEFEESTYPE" Relationship="Model.FKMEDICALCLAIMFORMDETSERVFEE" FromRole="MEDICALCLAIMFORMDETAIL" ToRole="SERVICEFEESTYPE" />
+    <NavigationProperty Name="UNIT" Relationship="Model.FKMEDICALCLAIMFORMDETUNIT" FromRole="MEDICALCLAIMFORMDETAIL" ToRole="UNIT" />
+  </EntityType>
+  <Association Name="FKMEDICALCLAIMFORMINDV">
+    <End Type="Model.INDIVIDUAL" Role="INDIVIDUAL" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INDIVIDUAL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="INDIVIDUALID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMDETMEDFRM">
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORMDETAIL" Role="MEDICALCLAIMFORMDETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORMDETAIL">
+        <PropertyRef Name="MEDICALCLAIMFORMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMINDVDEPT">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="DEPARTMENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMINDVORG">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="ORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMINDVSECT">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="0..1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="SECTIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMMAINORG">
+    <End Type="Model.ORGANIZATIONSTRUCTURE" Role="ORGANIZATIONSTRUCTURE" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORGANIZATIONSTRUCTURE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="MAINORGANISATIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMMEDDETSERV">
+    <End Type="Model.MEDICALDETAILSERVICE" Role="MEDICALDETAILSERVICE" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALDETAILSERVICE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="MEDICALDETAILSERVICEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMMEDSERV">
+    <End Type="Model.MEDICALSERVICE" Role="MEDICALSERVICE" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORM" Role="MEDICALCLAIMFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MEDICALSERVICE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORM">
+        <PropertyRef Name="MEDICALSERVICEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMDETSERVFEE">
+    <End Type="Model.SERVICEFEESTYPE" Role="SERVICEFEESTYPE" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORMDETAIL" Role="MEDICALCLAIMFORMDETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SERVICEFEESTYPE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORMDETAIL">
+        <PropertyRef Name="SERVICEFEESTYPEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKMEDICALCLAIMFORMDETUNIT">
+    <End Type="Model.UNIT" Role="UNIT" Multiplicity="1" />
+    <End Type="Model.MEDICALCLAIMFORMDETAIL" Role="MEDICALCLAIMFORMDETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UNIT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MEDICALCLAIMFORMDETAIL">
+        <PropertyRef Name="UNITID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

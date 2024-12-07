@@ -1,0 +1,157 @@
+﻿@model MedicalTreatment.Models.MEDICALDETAILSERVICE
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>تفاصيل  الخدمات الطبية</h2>
+
+@using (Html.BeginForm("Create", "MedicalDetailService", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<fieldset class="card p-4 shadow">
+    <legend class="bg-custom shadow  px-3">إضافة</legend>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.MEDICALSERVICEID, "MEDICALSERVICE")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.MEDICALSERVICEID, ViewBag.MEDICALSERVICEID as SelectList, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MEDICALSERVICEID)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                الإسم بالعربي
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAME)
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                الإسم بالانجليزي
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.NAMEEN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NAMEEN)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SERVICEINCLUDE)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.SERVICEINCLUDE, new List<SelectListItem>{ new SelectListItem{
+              Text="EmployeeOnly",
+              Value = "EmployeeOnly"
+          },
+new SelectListItem{
+              Text="EmployeeAndFamily",
+              Value = "EmployeeAndFamily"
+          }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessage("SERVICEINCLUDE")
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CEILINGTYPE)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.CEILINGTYPE, new List<SelectListItem>{ new SelectListItem{
+               Text="DetailService",
+               Value = "DetailService"
+           },
+ new SelectListItem{
+               Text="WholeCeiling",
+               Value = "WholeCeiling"
+           }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessage("CEILINGTYPE")
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.INPATIENT)
+            </div>
+            <div class="editor-field">
+
+                @Html.DropDownListFor(model => model.INPATIENT, new List<SelectListItem>{ new SelectListItem{
+              Text="Yes",
+              Value = "Yes"
+          },
+new SelectListItem{
+              Text="No",
+              Value = "No"
+          }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessage("INPATIENT")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OUTPATIENT)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.OUTPATIENT, new List<SelectListItem>{ new SelectListItem{
+             Text="Yes",
+             Value = "Yes"
+         },
+new SelectListItem{
+             Text="No",
+             Value = "No"
+         }}, "---اختر---", new { @class = "form-control" })
+                @Html.ValidationMessage("OUTPATIENT")
+            </div>
+        </div>
+            <div class="col-md-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.OUTOFNETWORK)
+                </div>
+                <div class="editor-field">
+                    @Html.DropDownListFor(model => model.OUTOFNETWORK, new List<SelectListItem>{ new SelectListItem{
+             Text="Yes",
+             Value = "Yes"
+         },
+new SelectListItem{
+             Text="No",
+             Value = "No"
+         }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("OUTOFNETWORK")
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PREAPPROVE)
+                </div>
+                <div class="editor-field">
+                    iv class="editor-field">
+                    @Html.DropDownListFor(model => model.PREAPPROVE, new List<SelectListItem>{ new SelectListItem{
+             Text="Yes",
+             Value = "Yes"
+         },
+new SelectListItem{
+             Text="No",
+             Value = "No"
+         }}, "---اختر---", new { @class = "form-control" })
+                    @Html.ValidationMessage("PREAPPROVE")
+                </div>
+            </div>
+        </div>
+    
+        <p class="mt-3">
+
+            <a href="/MedicalDetailService/Index" class="btn btn-outline-info">عودة للقائمة</a>
+            <input type="submit" class="btn btn-primary" value="حفظ" />
+        </p>
+</fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

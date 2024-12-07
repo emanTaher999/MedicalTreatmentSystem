@@ -1,0 +1,433 @@
+﻿@model MedicalTreatment.Models.VMIndividual
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset class ="card shadow w-100 p-4" dir="rtl">
+    <legend class="bg-custom shadow  px-3">INDIVIDUAL</legend>
+    <div class="row my-2">
+        <div class="col-md-4">
+            <img src="/Individual/RetrieveImage/@Model.Individual[0].ID" class="shadow rounded mt-3" height="200" width="200" />
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].NAME)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].NAME)
+                </div>
+            </div>
+          
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].NAMEEN)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].NAMEEN)
+                </div>
+            </div>
+            </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].BIRTHDATE)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].BIRTHDATE)
+                </div>
+            </div>
+            </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].GENDER)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].GENDER)
+                </div>
+            </div>
+            </div>
+       
+    </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE1.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE1.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE2.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE2.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE3.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].ORGANIZATIONSTRUCTURE3.NAME)
+               </div>
+           </div>
+           </div>
+   </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].MARITALSTATUS)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].MARITALSTATUS)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].RELATION.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].RELATION.NAME)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].NATIONALITY)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].NATIONALITY)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].INDIVIDUAL1.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].INDIVIDUAL1.NAME)
+               </div>
+           </div>
+   </div>
+       </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].STARTDATE)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].STARTDATE)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].TERMINATEDATE)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].TERMINATEDATE)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].YEARLYCEILING)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].YEARLYCEILING)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.Individual[0].OCCUPATION.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.Individual[0].OCCUPATION.NAME)
+               </div>
+           </div>
+           </div>
+   </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].JOBNUMBER)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].JOBNUMBER)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].STATUS)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].STATUS)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].LASTUPDATED)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].LASTUPDATED)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.Individual[0].JOBTITLE.NAME)
+                <div >
+                    @Html.DisplayFor(model => model.Individual[0].JOBTITLE.NAME)
+                </div>
+            </div>
+            </div>
+    </div>
+       
+</fieldset>
+
+@for (int i = 0; i < Model.FamilyData.ToArray().Length; i++)
+{
+    <fieldset class ="card shadow w-100 p-4" dir="rtl"style="margin-top:20px">
+    <legend class="bg-custom shadow  px-3">بيانات المكفولين</legend>
+        <div class="row my-2">
+            <div class="col-md-4">
+                <img src="/Individual/RetrieveImage/@Model.FamilyData[i].ID" class="shadow rounded mt-3" height="200" width="200" />
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].NAME)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].NAME)
+                </div>
+            </div>
+          
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].NAMEEN)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].NAMEEN)
+                </div>
+            </div>
+            </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].BIRTHDATE)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].BIRTHDATE)
+                </div>
+            </div>
+            </div>
+
+
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].GENDER)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].GENDER)
+                </div>
+            </div>
+            </div>
+       
+    </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE1.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE1.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE2.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE2.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE.NAME)
+               </div>
+           </div>
+           </div>
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE3.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].ORGANIZATIONSTRUCTURE3.NAME)
+               </div>
+           </div>
+           </div>
+   </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].MARITALSTATUS)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].MARITALSTATUS)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].RELATION.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].RELATION.NAME)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].NATIONALITY)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].NATIONALITY)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].INDIVIDUAL1.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].INDIVIDUAL1.NAME)
+               </div>
+           </div>
+   </div>
+       </div>
+   <div class="row my-2">
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].STARTDATE)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].STARTDATE)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].TERMINATEDATE)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].TERMINATEDATE)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].YEARLYCEILING)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].YEARLYCEILING)
+               </div>
+           </div>
+           </div>
+
+
+       <div class="col-md-3">
+           <div class="alert alert-info ">
+               @Html.DisplayNameFor(model => model.FamilyData[i].OCCUPATION.NAME)
+               <div >
+                   @Html.DisplayFor(model => model.FamilyData[i].OCCUPATION.NAME)
+               </div>
+           </div>
+           </div>
+   </div>
+    <div class="row my-2">
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].JOBNUMBER)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].JOBNUMBER)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].STATUS)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].STATUS)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].LASTUPDATED)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].LASTUPDATED)
+                </div>
+            </div>
+            </div>
+        <div class="col-md-3">
+            <div class="alert alert-info ">
+                @Html.DisplayNameFor(model => model.FamilyData[i].JOBTITLE.NAME)
+                <div >
+                    @Html.DisplayFor(model => model.FamilyData[i].JOBTITLE.NAME)
+                </div>
+            </div>
+            </div>
+    </div>
+       
+</fieldset>
+}
+      <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+              <div align="center">
+                  <a href="/Individual/Index" class="btn btn-outline-info">رجوع</a>
+              </div>
+          </div>
+          <div class="col-md-4">
+
+          </div>
+      </div>
